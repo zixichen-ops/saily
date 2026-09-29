@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Saily for Pepperdine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Crimson+Pro:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a tester's desk. The phone is center stage; the test console sits beside it. On a phone, the app is the page and the console folds below.
+   Palette: Pepperdine official colors (Blue PMS 281, Orange PMS 166; secondary Ocean, Sky, Fog, Mountain, Stone). Orange is reserved for urgent deadlines. */
+:root {
+  --bg: #E4EDF3;          /* Fog-tinted desk */
+  --surface: #F6F9FB;     /* app ground */
+  --card: #FFFFFF;
+  --ink: #0E1B2E;
+  --muted: #425563;       /* Mountain */
+  --line: #D3DEE6;
+  --primary: #00205B;     /* Pepperdine Blue */
+  --primary-soft: #E3EEF7;
+  --on-primary: #FFFFFF;
+  --sky: #5BC2E7;         /* Sky */
+  --stamp: #E35205;       /* Pepperdine Orange: urgent */
+  --stamp-soft: #FDEBE1;
+  --amber: #004C97;       /* Ocean: coming soon */
+  --amber-soft: #E1ECF7;
+  --stone: #7A99AC;       /* Stone */
+  --ok: #2B6F52;
+  --ok-soft: #DFF0E7;
+  --device: #0B1830;
+  --brand: #00205B;       /* Pepperdine Blue, fixed in both themes */
+  --brand-ink: #FFFFFF;
+  --brand-accent: #E35205;
+  --hero: #00205B;
+  --font-display: "Crimson Pro", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #070F1D; --surface: #0C1628; --card: #13203A; --ink: #E6EEF6; --muted: #9DB2C3; --line: #24344F;
+    --primary: #8FD3EF; --primary-soft: #16294A; --on-primary: #06101F; --sky: #5BC2E7;
+    --stamp: #FF8A4C; --stamp-soft: #3A1E10; --amber: #8DBBF0; --amber-soft: #14284A; --stone: #9DB2C3;
+    --ok: #79C99D; --ok-soft: #122E26; --device: #000000; --hero: #10306B; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #070F1D; --surface: #0C1628; --card: #13203A; --ink: #E6EEF6; --muted: #9DB2C3; --line: #24344F;
+  --primary: #8FD3EF; --primary-soft: #16294A; --on-primary: #06101F; --sky: #5BC2E7;
+  --stamp: #FF8A4C; --stamp-soft: #3A1E10; --amber: #8DBBF0; --amber-soft: #14284A; --stone: #9DB2C3;
+  --ok: #79C99D; --ok-soft: #122E26; --device: #000000; --hero: #10306B; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.45;
+  padding-inline: 16px; padding-block: 28px;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+a { color: var(--primary); }
+svg { flex: none; }
+
+.desk { display: flex; gap: 36px; justify-content: center; align-items: flex-start; max-width: 1100px; margin: 0 auto; }
+
+/* ---------- Device ---------- */
+.device {
+  width: 390px; height: 820px; flex: none; border-radius: 48px; border: 11px solid var(--device);
+  background: var(--surface); overflow: hidden; display: flex; flex-direction: column; position: relative;
+  box-shadow: 0 40px 80px -40px rgba(0, 32, 91, .45), 0 0 0 1px rgba(0, 32, 91, .06);
+}
+.screen { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; padding: 16px 18px 28px; display: flex; flex-direction: column; gap: 22px; scrollbar-width: none; }
+.screen::-webkit-scrollbar { display: none; }
+.screen > * { flex-shrink: 0; }
+
+/* ---------- Type ---------- */
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+h1 { font-family: var(--font-display); font-size: 31px; line-height: 1.05; font-weight: 700; letter-spacing: -0.005em; }
+h2 { font-family: var(--font-display); font-size: 21px; line-height: 1.15; font-weight: 700; }
+h3 { font-size: 15px; font-weight: 700; line-height: 1.3; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+.eyebrow { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.stack { display: flex; flex-direction: column; gap: 10px; }
+.row { display: flex; align-items: center; gap: 10px; }
+.between { justify-content: space-between; }
+.spacer { flex: 1; }
+
+/* ---------- Buttons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 14px; padding: 14px 18px; font-weight: 700; font-size: 15px; background: var(--primary); color: var(--on-primary); width: 100%; transition: transform .12s; }
+.btn:active { transform: scale(.98); }
+.btn[disabled] { opacity: .35; cursor: not-allowed; }
+.btn.ghost { background: var(--card); color: var(--primary); box-shadow: inset 0 0 0 1px var(--line); }
+.btn.small { padding: 9px 13px; font-size: 13px; width: auto; border-radius: 10px; }
+.linkbtn { background: none; border: 0; color: var(--primary); font-weight: 700; padding: 0; font-size: 13px; display: inline-flex; align-items: center; gap: 2px; }
+.iconbtn { width: 38px; height: 38px; border-radius: 50%; border: 0; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; color: var(--ink); position: relative; }
+.iconbtn .dot { position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--stamp); box-shadow: 0 0 0 2px var(--card); }
+
+/* ---------- App bar ---------- */
+.appbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.wordmark { display: flex; align-items: baseline; gap: 8px; }
+.wordmark b { font-family: var(--font-display); font-size: 25px; font-weight: 700; color: var(--primary); letter-spacing: -0.01em; }
+.wordmark span { font-size: 10.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--stamp); }
+.backbar { display: flex; align-items: center; justify-content: space-between; }
+.back { background: none; border: 0; display: inline-flex; align-items: center; gap: 2px; color: var(--primary); font-weight: 700; padding: 6px 0; font-size: 15px; margin-left: -4px; }
+
+/* ---------- Welcome ---------- */
+.welcome { background: var(--brand); color: var(--brand-ink); flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 44px 26px 28px; position: relative; overflow: hidden; }
+.welcome h1 { font-size: 46px; line-height: .98; color: var(--brand-ink); }
+.welcome p { opacity: .86; font-size: 16px; max-width: 28ch; }
+.welcome .btn { background: var(--brand-accent); color: var(--brand-ink); }
+.welcome .rule { width: 40px; height: 3px; background: var(--brand-accent); border-radius: 2px; }
+.welcome .fineprint { font-size: 11.5px; opacity: .62; text-align: center; }
+.waves { position: absolute; left: -20px; right: -20px; bottom: 170px; height: 120px; color: var(--sky); opacity: .5; pointer-events: none; }
+.waves path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+
+/* ---------- Onboarding ---------- */
+.progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.progress i { display: block; height: 100%; background: var(--primary); border-radius: 2px; transition: width .3s; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt { display: flex; align-items: center; gap: 12px; text-align: left; background: var(--card); border: 0; box-shadow: inset 0 0 0 1px var(--line); border-radius: 14px; padding: 14px; transition: box-shadow .15s, background .15s; }
+.opt[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--primary); background: var(--primary-soft); }
+.opt .tick { width: 22px; height: 22px; flex: none; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--stone); display: grid; place-items: center; }
+.opt.multi .tick { border-radius: 7px; }
+.opt[aria-pressed="true"] .tick { background: var(--primary); box-shadow: none; }
+.opt[aria-pressed="true"] .tick::after { content: ""; width: 10px; height: 5px; border: 2px solid var(--on-primary); border-top: 0; border-right: 0; transform: rotate(-45deg) translate(1px, -1px); }
+.opt strong { display: block; font-size: 15px; }
+.opt span.sub { display: block; font-size: 12.5px; color: var(--muted); }
+
+/* ---------- Hero: your next step ---------- */
+.hero { background: var(--hero); color: var(--brand-ink); border-radius: 22px; padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
+.hero::after { content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; border: 1.5px solid var(--sky); opacity: .22; box-shadow: 0 0 0 22px rgba(91, 194, 231, .05); pointer-events: none; }
+.hero .eyebrow { color: var(--sky); }
+.hero h2 { font-size: 24px; color: var(--brand-ink); max-width: 17ch; }
+.hero p { font-size: 13.5px; opacity: .8; }
+.hero .meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.hero .bar { height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .16); overflow: hidden; }
+.hero .bar i { display: block; height: 100%; background: var(--sky); }
+.hero .btn { background: var(--brand-ink); color: var(--brand); }
+.datechip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 12px; font-weight: 500; letter-spacing: .02em; padding: 5px 9px; border-radius: 8px; }
+.datechip.urgent { background: var(--brand-accent); color: var(--brand-ink); }
+.datechip.soon { background: rgba(91, 194, 231, .2); color: var(--brand-ink); }
+.datechip.later { background: rgba(255, 255, 255, .12); color: var(--brand-ink); }
+.hero .stepcount { font-size: 12.5px; opacity: .75; }
+
+/* ---------- Notice ---------- */
+.notice { display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%; background: var(--card); border: 0; box-shadow: inset 0 0 0 1px var(--line); border-radius: 16px; padding: 13px 14px; }
+.notice .ic { width: 34px; height: 34px; border-radius: 10px; background: var(--primary-soft); color: var(--primary); display: grid; place-items: center; flex: none; }
+.notice h3 { font-size: 14px; }
+.notice p { font-size: 12.5px; color: var(--muted); }
+.notice .chev { color: var(--stone); align-self: center; }
+.callout { border-radius: 14px; padding: 12px 14px; font-size: 13.5px; display: flex; flex-direction: column; gap: 4px; }
+.callout.info { background: var(--primary-soft); }
+.callout.warn { background: var(--stamp-soft); }
+.callout .eyebrow { color: var(--primary); }
+.callout.warn .eyebrow { color: var(--stamp); }
+
+/* ---------- Grouped lists ---------- */
+.group { display: flex; flex-direction: column; gap: 8px; }
+.group-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 2px; }
+.list { background: var(--card); border-radius: 18px; box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+.item { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%; text-align: left; background: none; border: 0; padding: 13px 14px; position: relative; }
+.item + .item::before { content: ""; position: absolute; top: 0; left: 64px; right: 0; height: 1px; background: var(--line); }
+.item:hover { background: color-mix(in srgb, var(--primary-soft) 45%, transparent); }
+.tile { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--primary-soft); color: var(--primary); }
+.tile.tip { background: color-mix(in srgb, var(--stone) 18%, transparent); color: var(--muted); }
+.tile.big { width: 46px; height: 46px; border-radius: 13px; }
+.item .t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.item .cat { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.item h3 { font-size: 14.5px; }
+.item .why { font-size: 12px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.item.done h3 { color: var(--muted); text-decoration: line-through; }
+.when { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.when b { font-size: 12.5px; font-weight: 500; color: var(--ink); }
+.when span { font-size: 11px; }
+.when .urgent { color: var(--stamp); font-weight: 500; }
+.when .soon { color: var(--amber); }
+.when .later { color: var(--muted); }
+.when .ok { color: var(--ok); }
+.item .chev { color: var(--stone); }
+
+.pill { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 700; padding: 3px 7px; border-radius: 999px; letter-spacing: .02em; }
+.pill.official { background: var(--ok-soft); color: var(--ok); }
+.pill.tip { background: color-mix(in srgb, var(--stone) 18%, transparent); color: var(--muted); }
+.pill.foryou { background: var(--primary-soft); color: var(--primary); }
+
+/* ---------- Explore ---------- */
+.search { display: flex; align-items: center; gap: 10px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); border-radius: 14px; padding: 0 14px; height: 46px; color: var(--muted); }
+.search input { border: 0; background: transparent; outline: none; flex: 1; min-width: 0; font-size: 15px; color: var(--ink); height: 100%; }
+.search input::-webkit-search-cancel-button { display: none; }
+.chips { display: flex; gap: 8px; }
+.chips.scroll { flex-wrap: nowrap; overflow-x: auto; margin-inline: -18px; padding-inline: 18px; scrollbar-width: none; }
+.chips.scroll::-webkit-scrollbar { display: none; }
+.chips.wrap { flex-wrap: wrap; }
+.chip { flex: none; border: 0; box-shadow: inset 0 0 0 1px var(--line); background: var(--card); border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--primary); box-shadow: none; color: var(--on-primary); }
+.topics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.topic { text-align: left; background: var(--card); border: 0; box-shadow: inset 0 0 0 1px var(--line); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.topic strong { font-size: 14px; display: block; }
+.topic span { font-size: 12px; color: var(--muted); }
+
+.seg { display: grid; grid-template-columns: 1fr 1fr; background: color-mix(in srgb, var(--stone) 18%, transparent); border-radius: 12px; padding: 3px; }
+.seg button { border: 0; background: transparent; padding: 8px; border-radius: 9px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 32, 91, .12); }
+
+/* ---------- Task detail ---------- */
+.detail-head { display: flex; flex-direction: column; gap: 12px; }
+.meta-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.duebox { display: flex; align-items: center; gap: 12px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); border-radius: 14px; padding: 12px 14px; }
+.duebox .big { font-family: var(--font-mono); font-size: 20px; font-variant-numeric: tabular-nums; }
+.duebox.urgent { box-shadow: inset 0 0 0 1.5px var(--stamp); }
+.duebox.urgent .big { color: var(--stamp); }
+.card { background: var(--card); box-shadow: inset 0 0 0 1px var(--line); border-radius: 18px; padding: 16px; }
+.steps { display: flex; flex-direction: column; }
+.step { display: flex; gap: 12px; align-items: flex-start; background: none; border: 0; padding: 11px 0; text-align: left; width: 100%; position: relative; }
+.step + .step { border-top: 1px solid var(--line); }
+.step .box { width: 22px; height: 22px; flex: none; border-radius: 7px; box-shadow: inset 0 0 0 1.5px var(--stone); display: grid; place-items: center; margin-top: 1px; transition: background .15s; }
+.step[aria-pressed="true"] .box { background: var(--ok); box-shadow: none; }
+.step[aria-pressed="true"] .box::after { content: ""; width: 10px; height: 5px; border: 2px solid var(--on-primary); border-top: 0; border-right: 0; transform: rotate(-45deg) translate(1px, -1px); }
+.step[aria-pressed="true"] .txt { color: var(--muted); text-decoration: line-through; }
+.minibar { height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; margin-top: 10px; }
+.minibar i { display: block; height: 100%; background: var(--ok); transition: width .25s; }
+.source { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0; text-decoration: none; color: var(--primary); font-weight: 700; font-size: 14px; }
+.source + .source { border-top: 1px solid var(--line); }
+.verified { font-size: 12px; color: var(--ok); display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+.contact { display: flex; flex-direction: column; gap: 2px; font-size: 13.5px; }
+
+/* ---------- Chat ---------- */
+.chat { display: flex; flex-direction: column; gap: 12px; }
+.bubble { max-width: 88%; padding: 11px 14px; border-radius: 18px; font-size: 14px; }
+.bubble.me { align-self: flex-end; background: var(--primary); color: var(--on-primary); border-bottom-right-radius: 6px; }
+.bubble.bot { align-self: flex-start; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); border-bottom-left-radius: 6px; display: flex; flex-direction: column; gap: 8px; }
+.bubble.bot ul { margin: 0; padding-left: 18px; }
+.bubble .fine { font-size: 11.5px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; display: flex; flex-direction: column; gap: 3px; }
+.composer { display: flex; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); background: var(--card); flex: none; }
+.composer input { flex: 1; min-width: 0; border: 0; box-shadow: inset 0 0 0 1px var(--line); border-radius: 999px; padding: 10px 16px; background: var(--surface); outline: none; }
+.composer input:focus { box-shadow: inset 0 0 0 1.5px var(--primary); }
+.composer button { width: 42px; height: 42px; border: 0; border-radius: 50%; background: var(--primary); color: var(--on-primary); display: grid; place-items: center; }
+.avatar-s { width: 26px; height: 26px; border-radius: 8px; background: var(--brand); color: var(--brand-ink); display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+
+/* ---------- Profile ---------- */
+.kv-row { display: flex; justify-content: space-between; gap: 14px; padding: 13px 16px; font-size: 14px; }
+.kv-row + .kv-row { border-top: 1px solid var(--line); }
+.kv-row dt { color: var(--muted); }
+.kv-row dd { margin: 0; font-weight: 700; text-align: right; }
+.kv-row dd.na { color: var(--stone); font-weight: 400; }
+
+/* ---------- Tab bar ---------- */
+.tabbar { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); background: var(--card); padding: 7px 6px 16px; flex: none; }
+.tabbar button { background: none; border: 0; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10.5px; font-weight: 700; color: var(--muted); padding: 2px 0; }
+.tabbar .pillwrap { width: 52px; height: 30px; border-radius: 15px; display: grid; place-items: center; position: relative; transition: background .15s; }
+.tabbar button[aria-current="page"] { color: var(--primary); }
+.tabbar button[aria-current="page"] .pillwrap { background: var(--primary-soft); }
+.tabbar .count { position: absolute; top: 0; right: 8px; min-width: 16px; height: 16px; border-radius: 8px; background: var(--stamp); color: #FFFFFF; font-size: 10px; line-height: 16px; text-align: center; padding: 0 4px; font-family: var(--font-mono); box-shadow: 0 0 0 2px var(--card); }
+
+.brandbar { height: 3px; background: linear-gradient(90deg, var(--brand) 0 80%, var(--brand-accent) 80% 100%); flex: none; }
+.toast { position: absolute; left: 50%; bottom: 96px; transform: translateX(-50%); background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 999px; font-size: 13px; font-weight: 700; white-space: nowrap; pointer-events: none; box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .4); }
+
+/* ---------- Tester console ---------- */
+.console { width: 300px; flex: none; display: flex; flex-direction: column; gap: 14px; position: sticky; top: 28px; }
+.console .panel { background: var(--card); box-shadow: inset 0 0 0 1px var(--line); border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+.console h2 { font-size: 22px; }
+.console label.radio { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; font-weight: 700; padding: 10px 12px; box-shadow: inset 0 0 0 1px var(--line); border-radius: 12px; cursor: pointer; }
+.console label.radio:has(input:checked) { box-shadow: inset 0 0 0 2px var(--primary); background: var(--primary-soft); }
+.console label.radio input { margin-top: 3px; accent-color: var(--primary); }
+.console label.radio small { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+.console .seg { grid-template-columns: repeat(3, 1fr); }
+.metrics { display: grid; grid-template-columns: 1fr auto; gap: 8px 10px; font-size: 13.5px; margin: 0; }
+.metrics dd { margin: 0; font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+.metrics dt { color: var(--muted); }
+.script { font-size: 13.5px; background: var(--surface); border-radius: 12px; padding: 12px 14px; border-left: 3px solid var(--brand-accent); }
+
+/* Mid widths (e.g. a side panel): keep the phone framed, console below */
+@media (max-width: 820px) {
+  .desk { flex-direction: column; align-items: center; gap: 24px; }
+  .console { width: min(100%, 420px); position: static; }
+}
+/* Real phones: the app is the page */
+@media (max-width: 480px) {
+  body { padding-inline: 0; padding-block: 0; }
+  .desk { gap: 0; align-items: stretch; }
+  .device { width: 100%; height: 100dvh; min-height: 560px; border: 0; border-radius: 0; box-shadow: none; }
+  .console { width: auto; padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+</head>
+<body>
+<div class="desk">
+  <main class="device" aria-label="Saily app prototype">
+    <div id="app" style="display:contents"></div>
+  </main>
+
+  <aside class="console" aria-label="Test console">
+    <div class="panel">
+      <div>
+        <p class="eyebrow">Prototype test console</p>
+        <h2>Run a test session</h2>
+      </div>
+      <p class="small muted">Pick a version, hand the phone to a participant, and read the numbers when they finish. Changing a setting starts a new session.</p>
+      <fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+        <legend class="eyebrow" style="margin-bottom:8px">Version</legend>
+        <label class="radio"><input type="radio" name="variant" id="v-personal" value="personal" checked><span>Personalized<small>Onboarding shapes tasks, dates and reminders.</small></span></label>
+        <label class="radio"><input type="radio" name="variant" id="v-generic" value="generic"><span>Generic hub<small>Everyone sees the same topics. No onboarding.</small></span></label>
+      </fieldset>
+      <fieldset id="qcount-set" style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+        <legend class="eyebrow" style="margin-bottom:8px">Onboarding length</legend>
+        <div class="seg" style="grid-template-columns:repeat(3,1fr)" role="group" aria-label="Number of onboarding questions">
+          <button type="button" data-q="4">4 questions</button>
+          <button type="button" data-q="6" aria-pressed="true">6 questions</button>
+          <button type="button" data-q="8">8 questions</button>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="panel">
+      <p class="eyebrow">Suggested task for the participant</p>
+      <p class="script">"You have an internship offer. Find out what you must do before you start, and by when." Then: "What should you do next about your visa?"</p>
+    </div>
+
+    <div class="panel">
+      <div class="row between"><p class="eyebrow">Live session</p><span class="small muted" id="m-variant"></span></div>
+      <dl class="metrics">
+        <dt>Time in app</dt><dd id="m-time">0:00</dd>
+        <dt>Onboarding time</dt><dd id="m-ob">not started</dd>
+        <dt>Questions answered</dt><dd id="m-q">0</dd>
+        <dt>Tasks opened</dt><dd id="m-open">0</dd>
+        <dt>Steps checked</dt><dd id="m-steps">0</dd>
+        <dt>Questions to Saily</dt><dd id="m-ask">0</dd>
+        <dt>First task opened at</dt><dd id="m-first">–</dd>
+      </dl>
+      <div class="row">
+        <button class="btn small" type="button" id="copy">Copy results</button>
+        <button class="btn small ghost" type="button" id="reset">New session</button>
+      </div>
+      <p class="small muted" id="copy-note" hidden></p>
+    </div>
+    <p class="small muted">Student concept prototype for MKTG 661, not an official Pepperdine app. Uses Pepperdine’s official color palette. Visa rules checked against official pages on Sep 29, 2026; deadlines are sample dates relative to today.</p>
+  </aside>
+</div>
+
+<script>
+(() => {
+  const DAY = 864e5;
+  const TODAY = new Date(); TODAY.setHours(0, 0, 0, 0);
+  const d = n => new Date(TODAY.getTime() + n * DAY);
+  const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const fmt = dt => `${MON[dt.getMonth()]} ${dt.getDate()}`;
+  const fmtY = dt => `${MON[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
+  const daysTo = dt => Math.round((dt - TODAY) / DAY);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const CHECKED = 'Sep 29, 2026';
+
+  const S = {
+    pepCPT: { label: 'Pepperdine OISS: CPT', url: 'https://www.pepperdine.edu/international-students/f-1-students/cpt.htm' },
+    pepEmp: { label: 'Pepperdine OISS: Employment and taxes', url: 'https://www.pepperdine.edu/international-students/f-1-students/employment-taxes.htm' },
+    pepCur: { label: 'Pepperdine OISS: Current and OPT students', url: 'https://www.pepperdine.edu/international-students/current-students/' },
+    pepIntl: { label: 'Pepperdine International Students', url: 'https://www.pepperdine.edu/international-students/' },
+    dhsCPT: { label: 'Study in the States (DHS): F-1 CPT', url: 'https://studyinthestates.dhs.gov/sevis-help-hub/student-records/fm-student-employment/f-1-curricular-practical-training-cpt' },
+    uscisOPT: { label: 'USCIS Policy Manual: Practical training', url: 'https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-5' },
+    i94: { label: 'CBP: Get your I-94 record', url: 'https://i94.cbp.dhs.gov/' },
+    irs: { label: 'IRS: About Form 8843', url: 'https://www.irs.gov/forms-pubs/about-form-8843' },
+    ds: { label: 'NYU Global Services: D/S rule status', url: 'https://www.nyu.edu/about/leadership-university-administration/organization-directory/office-of-global-services/immigration-news-and-updates/changes-to-duration-of-status-FAQ.html' },
+    dsDHS: { label: 'Study in the States: Fixed admission rule', url: 'https://studyinthestates.dhs.gov/final-rule-establishing-a-fixed-time-period-of-admission-and-an-extension-of-stay-procedure-quick' },
+    j1: { label: 'U.S. Department of State: J-1 Visa', url: 'https://j1visa.state.gov/' },
+  };
+
+  /* ---------- Onboarding questions ---------- */
+  const Q = {
+    school: { title: 'Which school do you attend?', sub: 'We load your school’s offices, forms and deadlines.', options: [['pepperdine', 'Pepperdine University', 'Malibu, California'], ['other', 'Another university', 'Demo shows Pepperdine content']] },
+    stage: { title: 'Where are you in your program?', sub: 'This decides which tasks come first.', options: [['new', 'New student', 'First term in the U.S.'], ['current', 'Continuing student', 'Mid-program'], ['graduating', 'Graduating this year', 'Final or next-to-last term'], ['unsure', 'I’m not sure yet', '']] },
+    visa: { title: 'What is your visa status?', sub: 'Work rules differ between F-1 and J-1.', options: [['F-1', 'F-1 student', ''], ['J-1', 'J-1 exchange visitor', ''], ['other', 'Other, or not sure', '']] },
+    interests: { title: 'What do you need help with right now?', sub: 'Select up to 3.', multi: 3, options: [['cpt', 'Internship / CPT', ''], ['opt', 'OPT / after graduation', ''], ['housing', 'Housing', ''], ['academics', 'Courses and registration', ''], ['transport', 'Getting around', ''], ['daily', 'Banking and phone', ''], ['health', 'Health insurance', ''], ['social', 'Meeting people', '']] },
+    level: { title: 'What level is your program?', sub: 'Some rules differ for graduate students.', options: [['ug', 'Undergraduate', ''], ['masters', 'Master’s', ''], ['phd', 'Doctoral', ''], ['exchange', 'Exchange or non-degree', '']] },
+    year: { title: 'Have you completed one full academic year in the U.S.?', sub: 'Most students need this before CPT.', options: [['yes', 'Yes', ''], ['no', 'Not yet', ''], ['unsure', 'Not sure', '']] },
+    housing: { title: 'Where do you live now?', sub: 'Moving triggers an address report.', options: [['on', 'On campus', ''], ['off', 'Off campus', ''], ['looking', 'Still looking', '']] },
+    gradTerm: { title: 'When do you expect to finish?', sub: 'Sets your OPT and graduation dates.', options: [['fall26', 'Fall 2026', 'December'], ['spring27', 'Spring 2027', 'May'], ['later', 'Later', '']] },
+  };
+  const ORDER = { 4: ['school', 'stage', 'visa', 'interests'], 6: ['school', 'stage', 'visa', 'interests', 'level', 'year'], 8: ['school', 'stage', 'visa', 'interests', 'level', 'year', 'housing', 'gradTerm'] };
+  const LABEL = key => val => { const o = Q[key].options.find(x => x[0] === val); return o ? o[1] : 'Not asked'; };
+
+  /* ---------- State ---------- */
+  let state;
+  function fresh(variant = 'personal', qCount = 6) {
+    return { variant, qCount, screen: 'welcome', tab: 'home', answers: { interests: [] }, qIndex: 0, detail: null, taskFilter: 'todo', done: {}, steps: {}, opened: new Set(), stepsChecked: 0, asked: 0, start: Date.now(), obStart: null, obEnd: null, firstOpen: null, chat: [], query: '', toast: null, prevTab: 'home' };
+  }
+  state = fresh();
+
+  /* ---------- Content engine ---------- */
+  function programEnd(a) {
+    if (a.gradTerm === 'fall26') return new Date(2026, 11, 18);
+    if (a.gradTerm === 'spring27') return new Date(2027, 4, 7);
+    return d(80); // assumed when not asked
+  }
+
+  function allTasks(a, personal) {
+    const f1 = a.visa === 'F-1' || a.visa === 'other' || !a.visa;
+    const j1 = a.visa === 'J-1';
+    const I = a.interests || [];
+    const T = [];
+    const add = t => T.push(t);
+
+    add({ id: 'checkin', cat: 'Visa', title: 'Complete your OISS immigration check-in', due: d(4), kind: 'official',
+      show: a.stage === 'new', why: 'You are in your first term.',
+      summary: 'New students confirm their arrival with the Office of International Student Services so your SEVIS record stays active.',
+      steps: ['Have your passport, I-20 or DS-2019, and visa ready', 'Download your most recent I-94 record from CBP', 'Follow the check-in instructions in your OISS welcome email', 'Save a copy of everything you submit'],
+      sources: [S.pepCur, S.i94] });
+
+    add({ id: 'cpt', cat: 'Work', title: 'Get CPT authorization before your internship starts', due: d(16), kind: 'official', priority: true,
+      show: f1 && !j1 && (I.includes('cpt') || a.stage === 'current') && a.stage !== 'new',
+      why: `You are a ${a.stage === 'graduating' ? 'graduating' : 'continuing'} F-1 student${I.includes('cpt') ? ' interested in internships' : ''}.`,
+      warn: a.year === 'no' ? 'You said you have not completed a full academic year. You may not be eligible yet, unless your graduate program requires CPT from the start. Ask OISS before you accept a start date.' : a.year === 'unsure' ? 'Check with OISS whether you have completed one full academic year. Most students need it for CPT.' : null,
+      summary: 'Curricular Practical Training lets F-1 students work in an internship that is part of their curriculum. It is authorized by your DSO and cannot be granted after you start working.',
+      steps: ['Confirm eligibility: full-time for one academic year, and the job relates to your major', 'Enroll in the Pepperdine course that is tied to the internship', 'Ask your employer for an offer letter (OISS has a sample letter)', 'Submit the CPT Request form and employer letter in the OISS Portal', 'Wait for your new I-20 that authorizes CPT. Do not start work before you have it'],
+      sources: [S.pepEmp, S.pepCPT, S.dhsCPT] });
+
+    const end = programEnd(a);
+    const open = new Date(end.getTime() - 90 * DAY), last = new Date(end.getTime() + 60 * DAY);
+    const windowOpen = open <= TODAY;
+    add({ id: 'opt', cat: 'Work', title: windowOpen ? 'Request your OPT recommendation from OISS' : 'Your OPT application window opens', due: windowOpen ? d(21) : open, kind: 'official', priority: windowOpen,
+      show: f1 && !j1 && (a.stage === 'graduating' || I.includes('opt')),
+      why: a.gradTerm ? `You expect to finish in ${LABEL('gradTerm')(a.gradTerm)}.` : 'You are graduating this year. Add your graduation term in Profile for exact dates.',
+      summary: `Post-completion OPT lets you work up to 12 months after graduation. USCIS must receive your application between 90 days before and 60 days after your program end date. ${personal ? `For an end date of ${fmtY(end)}, that window is ${fmtY(open)} to ${fmtY(last)}.` : ''}`,
+      steps: ['Sign up for an OPT workshop with OISS (310.506.4246)', 'Request the OPT recommendation and pick a start date', 'Receive your I-20 with the OPT recommendation on page 2', 'File Form I-765 with USCIS within 30 days of the recommendation', 'Track your case and keep your address current'],
+      sources: [S.pepEmp, S.uscisOPT] });
+
+    add({ id: 'j1at', cat: 'Work', title: 'Ask your J-1 sponsor about Academic Training', due: d(14), kind: 'official',
+      show: j1 && (I.includes('cpt') || I.includes('opt') || a.stage === 'graduating'),
+      why: 'CPT and OPT are F-1 benefits. J-1 students use Academic Training instead.',
+      summary: 'J-1 students work through Academic Training, which your program sponsor’s Responsible Officer authorizes.',
+      steps: ['Find your sponsor on your DS-2019', 'Email your Responsible Officer about Academic Training', 'Get written authorization before you start work'],
+      sources: [S.j1, S.pepIntl] });
+
+    add({ id: 'address', cat: 'Visa', title: 'Report your new U.S. address within 10 days', due: d(8), kind: 'official',
+      show: (a.housing === 'off' || a.housing === 'looking' || I.includes('housing')) && (f1 || j1),
+      why: a.housing === 'looking' ? 'You are looking for housing. Report the address after you move.' : 'You live off campus or are dealing with housing.',
+      summary: 'F-1 students must report a change of address within 10 days so OISS can update SEVIS. Demo date assumes you moved in on Sep 28.',
+      steps: ['Update your address in the OISS Portal or email oiss@pepperdine.edu', 'Use your full street address, not a P.O. box', 'Keep the confirmation email'],
+      sources: [S.pepCur] });
+
+    add({ id: 'register', cat: 'Academics', title: 'Register full-time for Spring 2027', due: d(42), kind: 'official',
+      show: a.stage !== 'graduating' || a.gradTerm === 'spring27' || a.gradTerm === 'later',
+      why: 'F-1 students must stay enrolled full-time every term.',
+      summary: 'Dropping below full-time without OISS approval ends F-1 status. Plan your courses with your advisor early.',
+      steps: ['Plan next term with your program advisor', 'Check that your units meet full-time for your level', 'Register before your registration window closes', 'Talk to OISS before dropping any class'],
+      sources: [S.pepCur] });
+
+    add({ id: 'insurance', cat: 'Health', title: 'Confirm your student health insurance', due: d(16), kind: 'official',
+      show: a.stage === 'new' || I.includes('health'),
+      why: a.stage === 'new' ? 'You are new this term.' : 'You asked about health insurance.',
+      summary: 'Make sure you are enrolled in, or have waived, the school insurance plan for this term, and save your insurance card on your phone.',
+      steps: ['Check your enrollment or waiver status in your student account', 'Save a photo of your insurance card', 'Find the nearest in-network urgent care'],
+      sources: [S.pepIntl] });
+
+    add({ id: 'endDate', cat: 'Graduation', title: 'Confirm the program end date on your I-20', due: d(14), kind: 'official',
+      show: a.stage === 'graduating',
+      why: 'Your OPT window and grace period count from this date.',
+      summary: 'If you need more time to finish, you must request an extension before the end date printed on your current I-20.',
+      steps: ['Compare your I-20 end date with your expected last term', 'Email OISS right away if they differ', 'Keep your advisor in the loop'],
+      sources: [S.pepCur] });
+
+    add({ id: 'tax', cat: 'Taxes', title: 'File Form 8843 for 2026, even with no income', due: new Date(2027, 3, 15), kind: 'official',
+      show: f1 || j1,
+      why: 'Every F-1 and J-1 student files it for each year in the U.S.',
+      summary: 'Form 8843 reports your days of presence as a student. You file it even if you earned nothing. If you worked, you also file a tax return.',
+      steps: ['Collect your passport, I-20 or DS-2019, and entry dates', 'Complete Form 8843', 'Attend the OISS tax workshop if you had income'],
+      sources: [S.irs, S.pepEmp] });
+
+    add({ id: 'bank', cat: 'Daily life', title: 'Open a U.S. bank account', due: d(10), kind: 'tip',
+      show: a.stage === 'new' || I.includes('daily'), why: a.stage === 'new' ? 'You are new this term.' : 'You asked about banking.',
+      summary: 'Many banks open student accounts with a passport and I-20. Ask about fees before you sign up.',
+      steps: ['Bring your passport, I-20 and proof of address', 'Ask for a student checking account with no monthly fee', 'Set up the bank’s app and your debit card'],
+      sources: [] });
+
+    add({ id: 'phone', cat: 'Daily life', title: 'Get a U.S. phone number', due: d(6), kind: 'tip',
+      show: a.stage === 'new' || I.includes('daily'), why: 'Banks, two-factor logins and employers expect a U.S. number.',
+      summary: 'A prepaid plan is the fastest way to get started without a U.S. credit history.',
+      steps: ['Compare prepaid plans at a carrier store', 'Keep your home number for family apps if needed', 'Add the new number to your OISS and school profiles'],
+      sources: [] });
+
+    add({ id: 'transport', cat: 'Getting around', title: 'Plan your commute', due: d(9), kind: 'tip',
+      show: I.includes('transport') || a.stage === 'new', why: 'You asked about getting around.',
+      summary: 'Most students combine the campus shuttle, an LA Metro TAP card, and rideshare. Ask about student transit discounts.',
+      steps: ['Save the campus shuttle schedule', 'Get a TAP card for Metro bus and rail', 'Share your live location with a friend on late trips'],
+      sources: [] });
+
+    add({ id: 'lease', cat: 'Housing', title: 'Review your lease before you sign', due: d(12), kind: 'tip',
+      show: I.includes('housing') && a.housing !== 'on', why: 'You asked about housing.',
+      summary: 'Students say the surprises are in deposits, utilities and early-exit fees.',
+      steps: ['Confirm the deposit amount and when it is returned', 'Ask which utilities are included', 'Read the early termination clause', 'Take move-in photos of every room'],
+      sources: [] });
+
+    add({ id: 'career', cat: 'Career', title: 'Book a career center appointment', due: d(18), kind: 'tip',
+      show: a.stage === 'graduating' || I.includes('cpt') || I.includes('opt'), why: 'You are planning work in the U.S.',
+      summary: 'Career advisors can review your résumé for U.S. employers and explain how to talk about CPT or OPT in interviews.',
+      steps: ['Book a résumé review', 'Prepare a one-line answer on your work authorization', 'List 10 target employers'],
+      sources: [] });
+
+    add({ id: 'social', cat: 'Community', title: 'Go to one international student event', due: d(3), kind: 'tip',
+      show: I.includes('social'), why: 'You want to meet people.',
+      summary: 'Small, regular events are the easiest way to build a group.',
+      steps: ['Pick one event this week', 'Invite one classmate', 'Follow up with one person you meet'],
+      sources: [] });
+
+    return T;
+  }
+
+  const GENERIC_IDS = ['checkin', 'cpt', 'opt', 'address', 'register', 'insurance', 'tax', 'bank', 'phone', 'lease', 'career'];
+
+  function visibleTasks() {
+    const a = state.answers, personal = state.variant === 'personal';
+    const list = allTasks(personal ? a : { interests: [] }, personal);
+    if (!personal) return GENERIC_IDS.map(id => list.find(t => t.id === id));
+    // High-stakes visa/work tasks due within 30 days lead; everything else by date.
+    const rank = t => (t.priority && daysTo(t.due) <= 30 ? 0 : 1);
+    return list.filter(t => t.show).sort((x, y) => rank(x) - rank(y) || x.due - y.due);
+  }
+  const findTask = id => { const personal = state.variant === 'personal'; return allTasks(personal ? state.answers : { interests: [] }, personal).find(t => t.id === id); };
+  const showDS = () => state.variant === 'personal' && state.answers.visa !== 'other';
+
+  /* ---------- Icons (24px grid, 1.8 stroke) ---------- */
+  const P = {
+    home: '<path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/>',
+    tasks: '<rect x="4.5" y="3.5" width="15" height="17" rx="2.5"/><path d="m8.5 9.5 1.6 1.6 3.4-3.4M8.5 15.5h7"/>',
+    explore: '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.3-4.3"/>',
+    ask: '<path d="M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v9a1.5 1.5 0 0 1-1.5 1.5h-8.5L5.5 20.5v-4H5A1.5 1.5 0 0 1 3.5 15V6A1.5 1.5 0 0 1 5 4.5z"/><path d="M8 9.5h8M8 12.5h5"/>',
+    profile: '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.3-3.6 4.2-5.5 7.5-5.5s6.2 1.9 7.5 5.5"/>',
+    bell: '<path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+    chev: '<path d="m9.5 6 6 6-6 6"/>',
+    back: '<path d="m14.5 6-6 6 6 6"/>',
+    ext: '<path d="M14 4.5h5.5V10M19.5 4.5 11 13M18 14v5a1 1 0 0 1-1 1H5.5a1 1 0 0 1-1-1V7.5a1 1 0 0 1 1-1H10"/>',
+    shield: '<path d="M12 3.5 19 6v6c0 4.3-2.9 7.3-7 8.8C7.9 19.3 5 16.3 5 12V6z"/><path d="m9 12 2 2 4-4"/>',
+    scale: '<path d="M12 4v16M7 20h10M5 7h14M5 7l-2.5 6a3 3 0 0 0 5 0zM19 7l-2.5 6a3 3 0 0 0 5 0z"/>',
+    send: '<path d="M4.5 12 20 4.5 15 20l-3-6.5z"/><path d="m12 13.5 8-9"/>',
+    Visa: '<rect x="5.5" y="3" width="13" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16.5h6"/>',
+    Work: '<rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3.5 12.5h17"/>',
+    Academics: '<path d="M3 5.5h6a3 3 0 0 1 3 3V20a2.5 2.5 0 0 0-2.5-2.5H3zM21 5.5h-6a3 3 0 0 0-3 3V20a2.5 2.5 0 0 1 2.5-2.5H21z"/>',
+    Health: '<path d="M12 20s-7.5-4.5-7.5-10A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 7.5 3c0 5.5-7.5 10-7.5 10z"/><path d="M12 10.5v4M10 12.5h4"/>',
+    Graduation: '<path d="m2.5 9.5 9.5-5 9.5 5-9.5 5z"/><path d="M6.5 11.7v4.8c3.3 2.3 7.7 2.3 11 0v-4.8M21.5 9.5v5"/>',
+    Taxes: '<path d="M6 3.5h12v17l-2.5-1.5-2 1.5-1.5-1.5-1.5 1.5-2-1.5L6 20.5z"/><path d="M9 8.5h6M9 12h6M9 15.5h3"/>',
+    'Daily life': '<rect x="3" y="6" width="18" height="12.5" rx="2"/><path d="M3 10.5h18M7 15h3"/>',
+    'Getting around': '<rect x="5" y="3.5" width="14" height="13.5" rx="3"/><path d="M5 10.5h14M8.5 17v3M15.5 17v3"/><circle cx="8.5" cy="13.8" r=".6"/><circle cx="15.5" cy="13.8" r=".6"/>',
+    Housing: '<path d="M4 10.5 12 4l8 6.5M6 9v11h12V9"/><path d="M10 20v-5h4v5"/>',
+    Career: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/>',
+    Community: '<circle cx="9" cy="8.5" r="3"/><path d="M3.5 19.5c.6-3 2.8-5 5.5-5s4.9 2 5.5 5"/><path d="M15.5 5.8a3 3 0 1 1 1 5.6M20.5 19.5c-.3-2-1.3-3.5-3-4.4"/>',
+  };
+  const ic = (name, size = 20, sw = 1.8) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[name] || P.Visa}</svg>`;
+  const tile = (t, big) => `<span class="tile ${t.kind === 'tip' ? 'tip' : ''} ${big ? 'big' : ''}">${ic(t.cat, big ? 22 : 19)}</span>`;
+
+  /* ---------- Dates ---------- */
+  const urg = t => { const n = daysTo(t.due); return n <= 7 ? 'urgent' : n <= 21 ? 'soon' : 'later'; };
+  const left = n => n < 0 ? `${-n}d overdue` : n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : `${n} days`;
+  function when(t) {
+    if (state.done[t.id]) return `<span class="when"><span class="ok">✓ Done</span></span>`;
+    if (state.variant === 'generic') return `<span class="chev">${ic('chev', 18)}</span>`;
+    return `<span class="when"><b>${fmt(t.due)}</b><span class="${urg(t)}">${left(daysTo(t.due))}</span></span>`;
+  }
+
+  /* ---------- Shared pieces ---------- */
+  function item(t, opts = {}) {
+    const personal = state.variant === 'personal';
+    const badges = opts.badges ? `${opts.mine ? '<span class="pill foryou">For you</span>' : ''}${t.kind === 'official' ? '<span class="pill official">Official</span>' : '<span class="pill tip">Student tip</span>'}` : '';
+    const sub = opts.summary ? t.summary.split('. ')[0] + '.' : (personal ? t.why : '');
+    return `<button class="item ${state.done[t.id] ? 'done' : ''}" data-act="open" data-id="${t.id}">
+      ${tile(t)}
+      <span class="t"><span class="row" style="gap:6px;flex-wrap:wrap"><span class="cat">${esc(t.cat)}</span>${badges}</span><h3>${esc(t.title)}</h3>${sub ? `<span class="why">${esc(sub)}</span>` : ''}</span>
+      ${opts.summary ? `<span class="chev">${ic('chev', 18)}</span>` : when(t)}
+    </button>`;
+  }
+  const list = items => `<div class="list">${items.join('')}</div>`;
+  function appbar() {
+    const urgent = state.variant === 'personal' && visibleTasks().some(t => !state.done[t.id] && daysTo(t.due) <= 7);
+    return `<header class="appbar">
+      <div class="wordmark"><b>Saily</b><span>Pepperdine</span></div>
+      <div class="row" style="gap:8px">
+        <button class="iconbtn" data-act="tab" data-tab="tasks" aria-label="Reminders">${ic('bell', 19)}${urgent ? '<span class="dot"></span>' : ''}</button>
+        <button class="iconbtn" data-act="tab" data-tab="profile" aria-label="Profile">${ic('profile', 19)}</button>
+      </div>
+    </header>`;
+  }
+  const backbar = () => `<div class="backbar"><button class="back" data-act="close">${ic('back', 20, 2)}Back</button></div>`;
+  function tabbar() {
+    const urgent = state.variant === 'personal' ? visibleTasks().filter(t => !state.done[t.id] && daysTo(t.due) <= 7).length : 0;
+    const tabs = [['home', 'Home'], ['tasks', state.variant === 'personal' ? 'Tasks' : 'Checklist'], ['explore', 'Explore'], ['ask', 'Saily'], ['profile', 'Profile']];
+    return `<nav class="tabbar">${tabs.map(([k, l]) => `<button data-act="tab" data-tab="${k}" ${state.tab === k && !state.detail ? 'aria-current="page"' : ''}><span class="pillwrap">${ic(k, 22)}${k === 'tasks' && urgent ? `<span class="count">${urgent}</span>` : ''}</span>${l}</button>`).join('')}</nav>`;
+  }
+  const dsNotice = () => `<button class="notice" data-act="article" data-id="ds">
+      <span class="ic">${ic('scale', 18)}</span>
+      <span class="stack" style="gap:2px;flex:1;min-width:0"><span class="eyebrow" style="font-size:10px">Rule update · ${CHECKED}</span><h3>New visa-stay rule is on hold</h3><p>A court paused the DHS “duration of status” rule. Current rules still apply.</p></span>
+      <span class="chev">${ic('chev', 18)}</span>
+    </button>`;
+  const DOW = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+  /* ---------- Screens ---------- */
+  function vWelcome() {
+    return `<section class="welcome">
+      <svg class="waves" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 30 C 50 12, 90 48, 140 30 S 230 12, 280 30 S 370 48, 400 30"/>
+        <path d="M0 64 C 50 46, 90 82, 140 64 S 230 46, 280 64 S 370 82, 400 64" opacity=".7"/>
+        <path d="M0 98 C 50 80, 90 116, 140 98 S 230 80, 280 98 S 370 116, 400 98" opacity=".45"/>
+      </svg>
+      <div class="stack" style="gap:18px;position:relative">
+        <div class="wordmark"><b style="color:var(--brand-ink)">Saily</b><span style="color:var(--brand-accent)">Pepperdine</span></div>
+        <div class="rule"></div>
+        <h1>Know what to do next, and by when.</h1>
+        <p>Visa steps, deadlines and campus tasks, sorted for your situation and checked against official sources.</p>
+      </div>
+      <div class="stack" style="position:relative">
+        <button class="btn" data-act="start">${state.variant === 'personal' ? 'Get started' : 'Browse resources'}</button>
+        <p class="small" style="text-align:center;opacity:.8">${state.variant === 'personal' ? `${state.qCount} quick questions · about a minute` : 'No sign-up needed'}</p>
+        <p class="fineprint">Student concept prototype for MKTG 661. Not an official Pepperdine app.</p>
+      </div>
+    </section>`;
+  }
+
+  function vOnboarding() {
+    const keys = ORDER[state.qCount], key = keys[state.qIndex], q = Q[key];
+    const val = state.answers[key];
+    const chosen = v => q.multi ? (val || []).includes(v) : val === v;
+    const ready = q.multi ? (val || []).length > 0 : !!val;
+    return `<section class="screen">
+      <div class="backbar">
+        ${state.qIndex > 0 ? `<button class="back" data-act="qback">${ic('back', 20, 2)}Back</button>` : `<div class="wordmark"><b>Saily</b></div>`}
+        <span class="mono small muted">${state.qIndex + 1} of ${keys.length}</span>
+      </div>
+      <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${keys.length}" aria-valuenow="${state.qIndex + 1}"><i style="width:${(state.qIndex + 1) / keys.length * 100}%"></i></div>
+      <div class="stack" style="gap:8px;margin-top:4px"><h1>${esc(q.title)}</h1><p class="muted">${esc(q.sub)}</p></div>
+      <div class="options" role="group" aria-label="${esc(q.title)}">
+        ${q.options.map(([v, l, s]) => `<button class="opt ${q.multi ? 'multi' : ''}" data-act="pick" data-key="${key}" data-val="${v}" aria-pressed="${chosen(v)}"><span class="tick"></span><span><strong>${esc(l)}</strong>${s ? `<span class="sub">${esc(s)}</span>` : ''}</span></button>`).join('')}
+      </div>
+      <div class="spacer"></div>
+      <button class="btn" data-act="qnext" ${ready ? '' : 'disabled'}>${state.qIndex === keys.length - 1 ? 'Build my plan' : 'Continue'}</button>
+    </section>`;
+  }
+
+  function vHome() {
+    const personal = state.variant === 'personal';
+    const all = visibleTasks();
+    if (!personal) {
+      const cats = [...new Set(all.map(t => t.cat))];
+      return `<section class="screen">
+        ${appbar()}
+        <div class="stack" style="gap:6px"><span class="eyebrow">International students</span><h1>Resources</h1></div>
+        <button class="search" data-act="tab" data-tab="explore" style="text-align:left;border:0">${ic('explore', 19)}<span class="small">Search topics, e.g. OPT, housing</span></button>
+        <div class="group"><div class="group-head"><h2>Topics</h2></div><div class="topics">${cats.map(c => `<button class="topic" data-act="cat" data-cat="${esc(c)}"><span class="tile">${ic(c, 19)}</span><span><strong>${esc(c)}</strong><span>${all.filter(t => t.cat === c).length} articles</span></span></button>`).join('')}</div></div>
+        <div class="group"><div class="group-head"><h2>Popular</h2></div>${list(all.slice(0, 5).map(t => item(t, { summary: true })))}</div>
+      </section>`;
+    }
+    const a = state.answers;
+    const todo = all.filter(t => !state.done[t.id]);
+    const next = todo[0];
+    const greeting = { new: 'Welcome to Malibu', current: 'Good to see you', graduating: 'Your final stretch', unsure: 'Welcome' }[a.stage] || 'Welcome';
+    let heroHTML;
+    if (next) {
+      const st = (state.steps[next.id] || []).filter(Boolean).length, n = daysTo(next.due);
+      heroHTML = `<article class="hero">
+        <span class="eyebrow">Your next step</span>
+        <h2>${esc(next.title)}</h2>
+        <p>${esc(next.why || '')}</p>
+        <div class="meta"><span class="datechip ${urg(next)}">${ic('bell', 13, 2)}${fmt(next.due)} · ${left(n)}</span><span class="stepcount">${st} of ${next.steps.length} steps</span></div>
+        <div class="bar"><i style="width:${st / next.steps.length * 100}%"></i></div>
+        <button class="btn" data-act="open" data-id="${next.id}">See the steps</button>
+      </article>`;
+    } else heroHTML = `<article class="hero"><span class="eyebrow">All caught up</span><h2>Nothing is due right now</h2><p>We will remind you when something new applies to you.</p></article>`;
+    const rest = todo.slice(1);
+    const week = rest.filter(t => daysTo(t.due) <= 7), later = rest.filter(t => daysTo(t.due) > 7).slice(0, 4);
+    return `<section class="screen">
+      ${appbar()}
+      <div class="stack" style="gap:6px"><span class="eyebrow">${DOW[TODAY.getDay()]}, ${fmt(TODAY)} · ${esc(a.visa || '')} ${esc(LABEL('stage')(a.stage).toLowerCase())}</span><h1>${greeting}</h1></div>
+      ${heroHTML}
+      ${showDS() ? dsNotice() : ''}
+      ${week.length ? `<div class="group"><div class="group-head"><h2>This week</h2><span class="small muted">${week.length} due</span></div>${list(week.map(t => item(t)))}</div>` : ''}
+      ${later.length ? `<div class="group"><div class="group-head"><h2>Coming up</h2><button class="linkbtn" data-act="tab" data-tab="tasks">All ${todo.length}${ic('chev', 14, 2.2)}</button></div>${list(later.map(t => item(t)))}</div>` : ''}
+      <p class="small muted">Picked for you from ${esc([a.visa, LABEL('stage')(a.stage).toLowerCase(), ...(a.interests || []).map(i => LABEL('interests')(i).toLowerCase())].filter(Boolean).join(', '))}. <button class="linkbtn" data-act="tab" data-tab="profile">Edit</button></p>
+    </section>`;
+  }
+
+  function vTasks() {
+    const personal = state.variant === 'personal';
+    const all = visibleTasks();
+    const todo = all.filter(t => !state.done[t.id]), done = all.filter(t => state.done[t.id]);
+    let body;
+    if (state.taskFilter === 'done') body = done.length ? list(done.map(t => item(t))) : `<p class="muted small" style="text-align:center;padding:28px 0">Tasks you finish show up here.</p>`;
+    else if (!personal) body = list(todo.map(t => item(t, { summary: true })));
+    else {
+      const buckets = [['This week', t => daysTo(t.due) <= 7], ['Next 3 weeks', t => daysTo(t.due) > 7 && daysTo(t.due) <= 21], ['Later', t => daysTo(t.due) > 21]];
+      body = buckets.map(([name, f]) => { const g = todo.filter(f).sort((x, y) => x.due - y.due); return g.length ? `<div class="group"><div class="group-head"><span class="eyebrow">${name}</span><span class="small muted">${g.length}</span></div>${list(g.map(t => item(t)))}</div>` : ''; }).join('') || `<p class="muted small" style="text-align:center;padding:28px 0">Nothing left to do.</p>`;
+    }
+    return `<section class="screen">
+      ${appbar()}
+      <div class="stack" style="gap:6px"><span class="eyebrow">${personal ? 'Sorted by deadline' : 'Same list for every student'}</span><h1>${personal ? 'Your tasks' : 'Checklist'}</h1></div>
+      <div class="seg" role="group"><button data-act="filter" data-f="todo" aria-pressed="${state.taskFilter === 'todo'}">To do · ${todo.length}</button><button data-act="filter" data-f="done" aria-pressed="${state.taskFilter === 'done'}">Done · ${done.length}</button></div>
+      ${!personal && state.taskFilter === 'todo' ? `<div class="callout info"><p>Deadlines vary by student. Open each topic and check the official page.</p></div>` : ''}
+      ${body}
+      ${personal ? `<p class="small muted row" style="gap:8px">${ic('bell', 16)}Reminders 7 days and 1 day before each deadline.</p>` : ''}
+    </section>`;
+  }
+
+  function vDetail() {
+    const t = findTask(state.detail);
+    const personal = state.variant === 'personal';
+    const st = state.steps[t.id] || [];
+    const doneCount = st.filter(Boolean).length;
+    const n = daysTo(t.due);
+    return `<section class="screen">
+      ${backbar()}
+      <div class="detail-head">
+        <div class="row" style="gap:12px">${tile(t, true)}<div class="meta-line"><span class="eyebrow">${esc(t.cat)}</span>${t.kind === 'official' ? `<span class="pill official">${ic('shield', 12, 2.2)}Official sources</span>` : `<span class="pill tip">Student tip</span>`}</div></div>
+        <h1 style="font-size:28px">${esc(t.title)}</h1>
+      </div>
+      ${personal && !state.done[t.id] ? `<div class="duebox ${urg(t)}"><span class="big">${fmt(t.due)}</span><span class="stack" style="gap:0"><strong style="font-size:14px">${left(n)}${n > 1 ? ' left' : ''}</strong><span class="small muted">Reminder set</span></span></div>` : ''}
+      ${personal && t.why ? `<div class="callout info"><span class="eyebrow">Why you see this</span><p>${esc(t.why)}</p></div>` : ''}
+      ${personal && t.warn ? `<div class="callout warn"><span class="eyebrow">Check this first</span><p>${esc(t.warn)}</p></div>` : ''}
+      <p style="font-size:15.5px">${esc(t.summary)}</p>
+      <div class="card">
+        <div class="row between"><h2>Steps</h2><span class="mono small muted">${doneCount} of ${t.steps.length}</span></div>
+        <div class="minibar"><i style="width:${doneCount / t.steps.length * 100}%"></i></div>
+        <div class="steps" style="margin-top:6px">${t.steps.map((s, i) => `<button class="step" data-act="step" data-id="${t.id}" data-i="${i}" aria-pressed="${!!st[i]}"><span class="box"></span><span class="txt">${esc(s)}</span></button>`).join('')}</div>
+      </div>
+      ${t.sources.length ? `<div class="card">
+        <h2>Official sources</h2>
+        <div style="margin-top:4px">${t.sources.map(s => `<a class="source" href="${s.url}" target="_blank" rel="noopener"><span>${esc(s.label)}</span>${ic('ext', 16, 2)}</a>`).join('')}</div>
+        <p class="verified">${ic('shield', 14, 2)}Last checked ${CHECKED}</p>
+      </div>` : `<div class="callout info"><p>This tip comes from current students. For anything visa-related, confirm with OISS.</p></div>`}
+      <div class="card contact"><span class="eyebrow" style="margin-bottom:4px">Questions? Ask OISS</span><span class="mono">oiss@pepperdine.edu</span><span class="mono">310.506.4246</span></div>
+      <button class="btn ${state.done[t.id] ? 'ghost' : ''}" data-act="done" data-id="${t.id}">${state.done[t.id] ? 'Move back to To do' : 'Mark as done'}</button>
+    </section>`;
+  }
+
+  function vArticleDS() {
+    return `<section class="screen">
+      ${backbar()}
+      <div class="detail-head">
+        <div class="row" style="gap:12px"><span class="tile big">${ic('scale', 22)}</span><div class="meta-line"><span class="eyebrow">Rule update</span><span class="pill official">${ic('shield', 12, 2.2)}Official sources</span></div></div>
+        <h1 style="font-size:28px">The “duration of status” rule is on hold</h1>
+      </div>
+      <div class="callout info"><span class="eyebrow">In short</span><p>Nothing changes for you right now. Keep following your I-20 or DS-2019, and check with OISS before travel.</p></div>
+      <div class="stack" style="gap:12px;font-size:15px">
+        <p>DHS published a rule in July 2026 to replace “duration of status” with a fixed admission end date and a shorter 30-day F-1 grace period. On Sep 14, 2026, a federal court postponed it before it took effect.</p>
+        <p><strong>For now,</strong> your stay is still tied to keeping your status and the end date on your I-20 or DS-2019. F-1 students keep the 60-day grace period after finishing.</p>
+        <p><strong>What to do:</strong> nothing unless OISS contacts you. Ask OISS before international travel or filing anything because of this rule. We will notify you if it changes.</p>
+      </div>
+      <div class="card"><h2>Sources</h2>
+        <div style="margin-top:4px"><a class="source" href="${S.ds.url}" target="_blank" rel="noopener"><span>${S.ds.label}</span>${ic('ext', 16, 2)}</a>
+        <a class="source" href="${S.dsDHS.url}" target="_blank" rel="noopener"><span>${S.dsDHS.label}</span>${ic('ext', 16, 2)}</a></div>
+        <p class="verified">${ic('shield', 14, 2)}Last checked ${CHECKED}</p>
+      </div>
+    </section>`;
+  }
+
+  function vExplore() {
+    const personal = state.variant === 'personal';
+    const all = allTasks(personal ? state.answers : { interests: [] }, personal);
+    const cats = [...new Set(all.map(t => t.cat))];
+    return `<section class="screen">
+      ${appbar()}
+      <div class="stack" style="gap:6px"><span class="eyebrow">All topics</span><h1>Explore</h1></div>
+      <label class="search">${ic('explore', 19)}<input id="q" type="search" placeholder="Search OPT, lease, bank…" value="${esc(state.query)}" aria-label="Search topics"></label>
+      <div class="chips scroll" role="group" aria-label="Categories">${['All', ...cats].map(c => `<button class="chip" data-act="qcat" data-cat="${esc(c)}" aria-pressed="${(state.query || 'All') === c}">${esc(c)}</button>`).join('')}</div>
+      <div id="results">${exploreList()}</div>
+    </section>`;
+  }
+  function exploreList() {
+    const personal = state.variant === 'personal';
+    const mine = new Set(personal ? visibleTasks().map(t => t.id) : []);
+    const all = allTasks(personal ? state.answers : { interests: [] }, personal);
+    const q = state.query.trim().toLowerCase();
+    const items = all.filter(t => !q || (t.title + ' ' + t.cat + ' ' + t.summary).toLowerCase().includes(q)).sort((x, y) => mine.has(y.id) - mine.has(x.id));
+    if (!items.length) return `<div class="callout info"><p>No topics match “${esc(state.query)}”. Try asking Saily, or contact OISS.</p></div>`;
+    return list(items.map(t => item(t, { badges: true, mine: mine.has(t.id), summary: true })));
+  }
+
+  /* ---------- Saily ---------- */
+  const SUGGEST = ['Am I eligible for CPT?', 'When can I apply for OPT?', 'I moved. What do I report?', 'Do I need to file taxes?', 'What happened to the visa-stay rule?'];
+  function answer(text) {
+    const a = state.answers, personal = state.variant === 'personal';
+    const t = text.toLowerCase();
+    const j1 = personal && a.visa === 'J-1';
+    if (/cpt|intern/.test(t)) {
+      if (j1) return { html: `<p>CPT is for F-1 students. As a J-1 student, you would use <strong>Academic Training</strong>, authorized by your program sponsor.</p>`, sources: [S.j1], task: 'j1at' };
+      const y = personal ? a.year : null;
+      return { html: `<p>${personal ? 'Based on your profile, you' : 'You'} may be eligible for CPT if:</p><ul><li>you have been enrolled full-time for one academic year (some graduate programs are an exception)</li><li>the internship relates to your major and is tied to a Pepperdine course</li><li>OISS issues a new I-20 authorizing it <strong>before</strong> you start</li></ul>${y === 'no' ? '<p><strong>You said you have not finished a full academic year yet</strong>, so check with OISS before accepting a start date.</p>' : ''}`, sources: [S.pepEmp, S.dhsCPT], task: 'cpt' };
+    }
+    if (/opt|graduat|after school/.test(t)) {
+      if (j1) return { html: `<p>OPT is for F-1 students. J-1 students use Academic Training through their sponsor.</p>`, sources: [S.j1], task: 'j1at' };
+      if (personal && (a.stage === 'graduating' || (a.interests || []).includes('opt'))) {
+        const end = programEnd(a), open = new Date(end - 90 * DAY), last = new Date(end.getTime() + 60 * DAY);
+        return { html: `<p>USCIS must receive your OPT application between 90 days before and 60 days after your program end date.</p><p>${a.gradTerm ? `For your expected end date of <strong>${fmtY(end)}</strong>` : `Using an estimated end date of <strong>${fmtY(end)}</strong> (add your term in Profile)`}, your window is <strong>${fmtY(open)} to ${fmtY(last)}</strong>. File within 30 days of your OISS recommendation.</p>`, sources: [S.uscisOPT, S.pepEmp], task: 'opt' };
+      }
+      return { html: `<p>USCIS must receive your OPT application between 90 days before and 60 days after your program end date, and within 30 days of your OISS recommendation.</p>`, sources: [S.uscisOPT, S.pepEmp], task: 'opt' };
+    }
+    if (/move|moved|address/.test(t)) return { html: `<p>Report your new U.S. address to OISS <strong>within 10 days</strong> of moving so your SEVIS record stays correct. Use your street address, not a P.O. box.</p>`, sources: [S.pepCur], task: 'address' };
+    if (/tax|8843/.test(t)) return { html: `<p>Yes. Every F-1 and J-1 student files <strong>Form 8843</strong> for each year in the U.S., even with no income. If you earned income, you also file a tax return. The usual deadline is April 15.</p>`, sources: [S.irs], task: 'tax' };
+    if (/rule|duration|d\/s|grace|status/.test(t)) return { html: `<p>A federal court postponed the new DHS rule on Sep 14, 2026. For now, “duration of status” continues and F-1 students keep the 60-day grace period. Check with OISS before travel or filings related to this rule.</p>`, sources: [S.ds, S.dsDHS] };
+    if (/insur|health|doctor/.test(t)) return { html: `<p>Check that you are enrolled in, or have waived, the school insurance plan this term, and save your insurance card on your phone.</p>`, sources: [S.pepIntl], task: 'insurance' };
+    if (/bank|phone|sim/.test(t)) return { html: `<p>Many banks open student accounts with a passport and I-20. For a phone, a prepaid plan is fastest. These are tips from students, not official guidance.</p>`, sources: [], task: 'bank' };
+    if (/hous|lease|rent|apartment/.test(t)) return { html: `<p>Before signing, confirm the deposit, which utilities are included and the early-exit fee. After you move, report your address within 10 days.</p>`, sources: [S.pepCur], task: 'lease' };
+    return { html: `<p>I can’t answer that reliably yet. For visa questions, please ask OISS directly: <span class="mono">oiss@pepperdine.edu</span> or <span class="mono">310.506.4246</span>.</p>`, sources: [] };
+  }
+  function vAsk() {
+    const personal = state.variant === 'personal';
+    const msgs = state.chat.length ? state.chat : [{ from: 'bot', html: `<p>Hi, I’m Saily. Ask me about CPT, OPT, taxes, housing or your deadlines.${personal ? ' I use your profile to tailor answers.' : ''}</p>`, sources: [] }];
+    return `<section class="screen" id="chatscreen">
+      ${appbar()}
+      <div class="stack" style="gap:6px"><span class="eyebrow">Assistant</span><h1>Ask Saily</h1><p class="small muted">Saily explains and points to official sources. OISS makes the final call on your case.</p></div>
+      <div class="chat">${msgs.map(m => m.from === 'me' ? `<div class="bubble me">${esc(m.text)}</div>` : `<div class="row" style="align-items:flex-end;gap:8px"><span class="avatar-s" aria-hidden="true">S</span><div class="bubble bot">${m.html}${m.task ? `<button class="btn small" data-act="open" data-id="${m.task}" style="align-self:flex-start">Open the task${ic('chev', 14, 2.2)}</button>` : ''}${m.sources && m.sources.length ? `<div class="fine">${m.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')}<span>Checked ${CHECKED}</span></div>` : ''}</div></div>`).join('')}</div>
+      <div class="chips wrap">${SUGGEST.map(s => `<button class="chip" data-act="suggest" data-text="${esc(s)}">${esc(s)}</button>`).join('')}</div>
+    </section>
+    <form class="composer" id="composer"><input id="askinput" placeholder="Ask a question" aria-label="Ask Saily" autocomplete="off"><button type="submit" aria-label="Send">${ic('send', 18, 2)}</button></form>`;
+  }
+
+  function vProfile() {
+    const a = state.answers, personal = state.variant === 'personal';
+    const NAMES = { school: 'School', stage: 'Stage', visa: 'Visa', interests: 'Help with', level: 'Program level', year: 'Full year done', housing: 'Housing', gradTerm: 'Finishing' };
+    const rows = ORDER[8].map(k => { const v = k === 'interests' ? (a.interests || []).map(LABEL('interests')).join(', ') : a[k] ? LABEL(k)(a[k]) : ''; return `<div class="kv-row"><dt>${NAMES[k]}</dt><dd class="${v ? '' : 'na'}">${esc(v || 'Not asked')}</dd></div>`; }).join('');
+    return `<section class="screen">
+      ${appbar()}
+      <div class="stack" style="gap:6px"><span class="eyebrow">Profile</span><h1>${personal ? 'Your situation' : 'Guest'}</h1></div>
+      ${personal ? `<dl class="list" style="margin:0">${rows}</dl>
+        <p class="small muted">More answers mean more exact dates. Items marked “Not asked” use safe defaults.</p>
+        <button class="btn ghost" data-act="edit">Edit my answers</button>` : `<div class="callout info"><p>The generic version does not collect a profile. Everyone sees the same content.</p></div>`}
+      <div class="notice" style="cursor:default"><span class="ic">${ic('bell', 18)}</span><span class="stack" style="gap:2px"><h3>Notifications on</h3><p>7 days and 1 day before each deadline, plus rule-change alerts for your visa type.</p></span></div>
+      <button class="btn ghost" data-act="restart">Sign out and restart demo</button>
+    </section>`;
+  }
+
+  /* ---------- Render ---------- */
+  const app = document.getElementById('app');
+  function render() {
+    let html;
+    if (state.screen === 'welcome') html = vWelcome();
+    else if (state.screen === 'onboarding') html = vOnboarding();
+    else {
+      let body;
+      if (state.detail === 'ds') body = vArticleDS();
+      else if (state.detail) body = vDetail();
+      else body = { home: vHome, tasks: vTasks, explore: vExplore, ask: vAsk, profile: vProfile }[state.tab]();
+      html = '<div class="brandbar" aria-hidden="true"></div>' + body + tabbar();
+    }
+    if (state.toast) html += `<div class="toast" role="status">${esc(state.toast)}</div>`;
+    app.innerHTML = html;
+    const cs = document.getElementById('chatscreen'); if (cs) cs.scrollTop = cs.scrollHeight;
+    metrics();
+  }
+  function toast(msg) { state.toast = msg; render(); clearTimeout(toast.t); toast.t = setTimeout(() => { state.toast = null; render(); }, 1600); }
+  function scrollTop() { const s = app.querySelector('.screen'); if (s) s.scrollTop = 0; }
+
+  app.addEventListener('click', e => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    const act = b.dataset.act;
+    if (act === 'start') {
+      if (state.variant === 'personal') { state.screen = 'onboarding'; state.qIndex = 0; state.obStart = Date.now(); }
+      else { state.screen = 'main'; state.tab = 'home'; }
+    } else if (act === 'pick') {
+      const q = Q[b.dataset.key], v = b.dataset.val;
+      if (q.multi) {
+        const arr = state.answers[b.dataset.key] || [];
+        if (arr.includes(v)) state.answers[b.dataset.key] = arr.filter(x => x !== v);
+        else if (arr.length < q.multi) state.answers[b.dataset.key] = [...arr, v];
+        else { toast(`Pick up to ${q.multi}`); return; }
+      } else state.answers[b.dataset.key] = v;
+    } else if (act === 'qnext') {
+      const keys = ORDER[state.qCount];
+      if (state.qIndex < keys.length - 1) state.qIndex++;
+      else { state.obEnd = state.obEnd || Date.now(); state.screen = 'main'; state.tab = 'home'; }
+    } else if (act === 'qback') { state.qIndex = Math.max(0, state.qIndex - 1); }
+    else if (act === 'tab') { state.tab = b.dataset.tab; state.detail = null; if (b.dataset.tab === 'explore' && state.query === 'All') state.query = ''; }
+    else if (act === 'open') {
+      state.detail = b.dataset.id; state.opened.add(b.dataset.id);
+      if (!state.firstOpen) state.firstOpen = Date.now();
+    }
+    else if (act === 'article') { state.detail = b.dataset.id; }
+    else if (act === 'close') { state.detail = null; }
+    else if (act === 'step') {
+      const id = b.dataset.id, i = +b.dataset.i;
+      const arr = state.steps[id] = state.steps[id] || [];
+      arr[i] = !arr[i]; if (arr[i]) state.stepsChecked++;
+      const t = findTask(id);
+      if (arr.filter(Boolean).length === t.steps.length && !state.done[id]) { state.done[id] = true; toast('All steps done. Task complete'); return; }
+    }
+    else if (act === 'done') { const id = b.dataset.id; state.done[id] = !state.done[id]; toast(state.done[id] ? 'Marked as done' : 'Moved back to To do'); return; }
+    else if (act === 'filter') { state.taskFilter = b.dataset.f; }
+    else if (act === 'cat') { state.tab = 'explore'; state.query = b.dataset.cat; }
+    else if (act === 'qcat') { state.query = b.dataset.cat === 'All' ? '' : b.dataset.cat; }
+    else if (act === 'suggest') { ask(b.dataset.text); return; }
+    else if (act === 'edit') { state.screen = 'onboarding'; state.qIndex = 0; }
+    else if (act === 'restart') { state = fresh(state.variant, state.qCount); }
+    render();
+    if (['open', 'close', 'tab', 'article', 'qnext', 'start'].includes(act)) scrollTop();
+  });
+  app.addEventListener('input', e => {
+    if (e.target.id !== 'q') return;
+    state.query = e.target.value;
+    document.getElementById('results').innerHTML = exploreList();
+    app.querySelectorAll('[data-act="qcat"]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.cat === 'All' ? !state.query : c.dataset.cat === state.query)));
+  });
+  app.addEventListener('submit', e => {
+    if (e.target.id !== 'composer') return;
+    e.preventDefault();
+    const v = document.getElementById('askinput').value.trim();
+    if (v) ask(v);
+  });
+  function ask(text) {
+    state.asked++;
+    state.chat.push({ from: 'me', text });
+    const r = answer(text);
+    state.chat.push({ from: 'bot', html: r.html, sources: r.sources, task: r.task });
+    render();
+    const inp = document.getElementById('askinput'); if (inp) inp.focus();
+  }
+
+  /* ---------- Test console ---------- */
+  const $ = id => document.getElementById(id);
+  const mmss = ms => { const s = Math.round(ms / 1000); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  function answeredCount() { return ORDER[state.qCount].filter(k => k === 'interests' ? (state.answers.interests || []).length : state.answers[k]).length; }
+  function metrics() {
+    $('m-variant').textContent = state.variant === 'personal' ? `Personalized · ${state.qCount}Q` : 'Generic hub';
+    $('m-time').textContent = mmss(Date.now() - state.start);
+    $('m-ob').textContent = state.variant === 'generic' ? 'n/a' : state.obEnd ? mmss(state.obEnd - state.obStart) : state.obStart ? 'in progress' : 'not started';
+    $('m-q').textContent = state.variant === 'generic' ? 'n/a' : `${answeredCount()} / ${state.qCount}`;
+    $('m-open').textContent = state.opened.size;
+    $('m-steps').textContent = state.stepsChecked;
+    $('m-ask').textContent = state.asked;
+    $('m-first').textContent = state.firstOpen ? mmss(state.firstOpen - state.start) : '–';
+    $('qcount-set').style.opacity = state.variant === 'generic' ? .45 : 1;
+  }
+  setInterval(metrics, 1000);
+
+  document.querySelectorAll('input[name="variant"]').forEach(r => r.addEventListener('change', () => { state = fresh(r.value, state.qCount); render(); }));
+  document.querySelectorAll('[data-q]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-q]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    state = fresh(state.variant, +b.dataset.q); render();
+  }));
+  $('reset').addEventListener('click', () => { state = fresh(state.variant, state.qCount); $('copy-note').hidden = true; render(); });
+  $('copy').addEventListener('click', () => {
+    const a = state.answers;
+    const lines = [
+      `Saily prototype session · ${new Date().toLocaleString()}`,
+      `Version: ${state.variant === 'personal' ? `Personalized, ${state.qCount} questions` : 'Generic hub'}`,
+      `Time in app: ${$('m-time').textContent}`,
+      `Onboarding time: ${$('m-ob').textContent}`,
+      `Questions answered: ${$('m-q').textContent}`,
+      `First task opened at: ${$('m-first').textContent}`,
+      `Tasks opened: ${[...state.opened].join(', ') || 'none'}`,
+      `Steps checked: ${state.stepsChecked}`,
+      `Tasks marked done: ${Object.keys(state.done).filter(k => state.done[k]).join(', ') || 'none'}`,
+      `Questions to Saily: ${state.asked}`,
+      state.variant === 'personal' ? `Profile: ${Object.entries(a).map(([k, v]) => `${k}=${Array.isArray(v) ? v.join('+') : v}`).join('; ')}` : '',
+      'Relevance rating (1-5): ', 'Trust rating (1-5): ', 'Notes: ',
+    ].filter(Boolean).join('\n');
+    const note = $('copy-note');
+    const done = msg => { note.textContent = msg; note.hidden = false; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(lines).then(() => done('Copied. Paste it into your test notes.'), () => done(lines));
+    else done(lines);
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
