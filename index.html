@@ -276,6 +276,58 @@ p { margin: 0; }
 .metrics dt { color: var(--muted); }
 .script { font-size: 13.5px; background: var(--surface); border-radius: 12px; padding: 12px 14px; border-left: 3px solid var(--brand-accent); }
 
+/* ---------- Market ---------- */
+.seg.three { grid-template-columns: repeat(3, 1fr); }
+.lrow { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 14px; align-items: center; width: 100%; text-align: left; background: none; border: 0; padding: 12px 14px; position: relative; }
+.lrow + .lrow::before { content: ""; position: absolute; top: 0; left: 112px; right: 0; height: 1px; background: var(--line); }
+.lrow:hover { background: color-mix(in srgb, var(--primary-soft) 45%, transparent); }
+.lrow .t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lrow h3 { font-size: 14.5px; }
+.lrow .why { font-size: 12px; color: var(--muted); }
+.thumb { position: relative; width: 84px; height: 84px; border-radius: 14px; display: grid; place-items: center; overflow: hidden; color: var(--primary); background: var(--primary-soft); }
+.thumb.cars { background: color-mix(in srgb, var(--sky) 26%, var(--card)); }
+.thumb.items { background: color-mix(in srgb, var(--stone) 22%, var(--card)); color: var(--muted); }
+.thumb::after { content: ""; position: absolute; inset: auto -20% -45% -20%; height: 70%; border-radius: 50%; background: var(--card); opacity: .35; }
+.thumb.big { width: 100%; height: 190px; border-radius: 20px; }
+.thumb-tag { position: absolute; left: 7px; bottom: 7px; z-index: 1; font-size: 10px; font-weight: 700; letter-spacing: .04em; background: var(--card); color: var(--ink); padding: 2px 7px; border-radius: 999px; }
+.thumb.big .thumb-tag { left: 12px; bottom: 12px; font-size: 11.5px; padding: 4px 10px; }
+.price { font-size: 16px; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+.price small { font-size: 12px; color: var(--muted); margin-left: 2px; }
+.price.big { font-size: 26px; }
+.vbadge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; color: var(--ok); margin-top: 2px; }
+.site { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; text-decoration: none; color: var(--muted); position: relative; }
+.site + .site::before { content: ""; position: absolute; top: 0; left: 62px; right: 0; height: 1px; background: var(--line); }
+.site:hover { background: color-mix(in srgb, var(--primary-soft) 45%, transparent); }
+.site .t { display: flex; flex-direction: column; min-width: 0; }
+.site strong { font-size: 14px; color: var(--ink); }
+.site span span, .site .t > span { font-size: 12px; color: var(--muted); }
+.favicon { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--brand); color: var(--brand-ink); font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.seller { display: flex; align-items: center; gap: 12px; }
+.seller .avatar-s, .who .avatar-s { width: 36px; height: 36px; border-radius: 50%; font-size: 17px; }
+.field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.field input, .field select, .field textarea { font-weight: 400; font-size: 15px; color: var(--ink); background: var(--card); border: 0; box-shadow: inset 0 0 0 1px var(--line); border-radius: 12px; padding: 11px 13px; outline: none; resize: vertical; width: 100%; }
+.field input:focus, .field select:focus, .field textarea:focus { box-shadow: inset 0 0 0 1.5px var(--primary); }
+
+/* ---------- Forum ---------- */
+.thread { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%; text-align: left; background: none; border: 0; padding: 13px 16px; position: relative; }
+.thread + .thread::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--line); }
+.thread:hover { background: color-mix(in srgb, var(--primary-soft) 45%, transparent); }
+.thread .t { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.thread .cat { font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.thread h3 { font-size: 14.5px; }
+.thread .why { font-size: 12px; color: var(--muted); }
+.replies { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.post { display: flex; flex-direction: column; gap: 8px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); border-radius: 16px; padding: 14px; font-size: 14.5px; }
+.post .who { display: flex; align-items: center; gap: 10px; font-size: 13.5px; }
+.post.reply.staff { box-shadow: inset 0 0 0 1.5px var(--ok); }
+.avatar-s.staffav { background: var(--ok); }
+.notice.saily { box-shadow: inset 0 0 0 1.5px var(--primary); }
+
+/* ---------- Home quick actions ---------- */
+.quick { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.quick button { display: flex; flex-direction: column; align-items: center; gap: 6px; background: none; border: 0; padding: 4px 0; font-size: 12px; font-weight: 700; color: var(--ink); }
+.quick .tile { width: 52px; height: 52px; border-radius: 16px; }
+
 /* Mid widths (e.g. a side panel): keep the phone framed, console below */
 @media (max-width: 820px) {
   .desk { flex-direction: column; align-items: center; gap: 24px; }
@@ -322,7 +374,7 @@ p { margin: 0; }
 
     <div class="panel">
       <p class="eyebrow">Suggested task for the participant</p>
-      <p class="script">"You have an internship offer. Find out what you must do before you start, and by when." Then: "What should you do next about your visa?"</p>
+      <p class="script">1. "You have an internship offer. Find out what you must do before you start, and by when."<br>2. "You need a room for spring. Find one option and what to check before paying."<br>3. "Ask other students whether a used-car price is fair."</p>
     </div>
 
     <div class="panel">
@@ -334,6 +386,10 @@ p { margin: 0; }
         <dt>Tasks opened</dt><dd id="m-open">0</dd>
         <dt>Steps checked</dt><dd id="m-steps">0</dd>
         <dt>Questions to Saily</dt><dd id="m-ask">0</dd>
+        <dt>Listings opened</dt><dd id="m-mkt">0</dd>
+        <dt>Forum threads opened</dt><dd id="m-forum">0</dd>
+        <dt>Outside sites clicked</dt><dd id="m-sites">0</dd>
+        <dt>Posts and replies</dt><dd id="m-posts">0</dd>
         <dt>First task opened at</dt><dd id="m-first">–</dd>
       </dl>
       <div class="row">
@@ -370,6 +426,9 @@ p { margin: 0; }
     ds: { label: 'NYU Global Services: D/S rule status', url: 'https://www.nyu.edu/about/leadership-university-administration/organization-directory/office-of-global-services/immigration-news-and-updates/changes-to-duration-of-status-FAQ.html' },
     dsDHS: { label: 'Study in the States: Fixed admission rule', url: 'https://studyinthestates.dhs.gov/final-rule-establishing-a-fixed-time-period-of-admission-and-an-extension-of-stay-procedure-quick' },
     j1: { label: 'U.S. Department of State: J-1 Visa', url: 'https://j1visa.state.gov/' },
+    ftcRent: { label: 'FTC: Rental listing scams', url: 'https://consumer.ftc.gov/articles/rental-listing-scams' },
+    dmvPrivate: { label: 'California DMV: Buying from a private party', url: 'https://www.dmv.ca.gov/portal/vehicle-registration/new-registration/registering-a-vehicle-purchased-from-a-private-party/' },
+    dmvSmog: { label: 'California DMV: Smog inspections', url: 'https://www.dmv.ca.gov/portal/vehicle-registration/smog-inspections/' },
   };
 
   /* ---------- Onboarding questions ---------- */
@@ -377,7 +436,7 @@ p { margin: 0; }
     school: { title: 'Which school do you attend?', sub: 'We load your school’s offices, forms and deadlines.', options: [['pepperdine', 'Pepperdine University', 'Malibu, California'], ['other', 'Another university', 'Demo shows Pepperdine content']] },
     stage: { title: 'Where are you in your program?', sub: 'This decides which tasks come first.', options: [['new', 'New student', 'First term in the U.S.'], ['current', 'Continuing student', 'Mid-program'], ['graduating', 'Graduating this year', 'Final or next-to-last term'], ['unsure', 'I’m not sure yet', '']] },
     visa: { title: 'What is your visa status?', sub: 'Work rules differ between F-1 and J-1.', options: [['F-1', 'F-1 student', ''], ['J-1', 'J-1 exchange visitor', ''], ['other', 'Other, or not sure', '']] },
-    interests: { title: 'What do you need help with right now?', sub: 'Select up to 3.', multi: 3, options: [['cpt', 'Internship / CPT', ''], ['opt', 'OPT / after graduation', ''], ['housing', 'Housing', ''], ['academics', 'Courses and registration', ''], ['transport', 'Getting around', ''], ['daily', 'Banking and phone', ''], ['health', 'Health insurance', ''], ['social', 'Meeting people', '']] },
+    interests: { title: 'What do you need help with right now?', sub: 'Select up to 3.', multi: 3, options: [['cpt', 'Internship / CPT', ''], ['opt', 'OPT / after graduation', ''], ['housing', 'Housing', ''], ['academics', 'Courses and registration', ''], ['transport', 'Car or getting around', ''], ['daily', 'Banking and phone', ''], ['health', 'Health insurance', ''], ['social', 'Meeting people', ''], ['market', 'Buying and selling used stuff', '']] },
     level: { title: 'What level is your program?', sub: 'Some rules differ for graduate students.', options: [['ug', 'Undergraduate', ''], ['masters', 'Master’s', ''], ['phd', 'Doctoral', ''], ['exchange', 'Exchange or non-degree', '']] },
     year: { title: 'Have you completed one full academic year in the U.S.?', sub: 'Most students need this before CPT.', options: [['yes', 'Yes', ''], ['no', 'Not yet', ''], ['unsure', 'Not sure', '']] },
     housing: { title: 'Where do you live now?', sub: 'Moving triggers an address report.', options: [['on', 'On campus', ''], ['off', 'Off campus', ''], ['looking', 'Still looking', '']] },
@@ -386,10 +445,212 @@ p { margin: 0; }
   const ORDER = { 4: ['school', 'stage', 'visa', 'interests'], 6: ['school', 'stage', 'visa', 'interests', 'level', 'year'], 8: ['school', 'stage', 'visa', 'interests', 'level', 'year', 'housing', 'gradTerm'] };
   const LABEL = key => val => { const o = Q[key].options.find(x => x[0] === val); return o ? o[1] : 'Not asked'; };
 
+  /* ---------- Market + Forum data (sample content for the prototype) ---------- */
+  const SITES = {
+    housing: [
+      { name: 'Zillow Rentals', note: 'Apartments and houses near Malibu', url: 'https://www.zillow.com/malibu-ca/rentals/' },
+      { name: 'Apartments.com', note: 'Filter by price, pets, furnished', url: 'https://www.apartments.com/malibu-ca/' },
+      { name: 'Craigslist LA · Sublets', note: 'Short-term rooms and sublets', url: 'https://losangeles.craigslist.org/search/sub' },
+      { name: 'Craigslist LA · Rooms', note: 'Rooms in shared houses', url: 'https://losangeles.craigslist.org/search/roo' },
+      { name: 'Facebook Marketplace · Rentals', note: 'Local rentals, needs a Facebook login', url: 'https://www.facebook.com/marketplace/la/propertyrentals' },
+    ],
+    cars: [
+      { name: 'CarMax', note: 'Dealer, fixed prices, return window', url: 'https://www.carmax.com/cars' },
+      { name: 'Carvana', note: 'Buy online, home delivery', url: 'https://www.carvana.com/cars' },
+      { name: 'Cars.com', note: 'Dealer and private listings', url: 'https://www.cars.com/' },
+      { name: 'Craigslist LA · Cars', note: 'Private sellers, check carefully', url: 'https://losangeles.craigslist.org/search/cta' },
+      { name: 'Facebook Marketplace · Vehicles', note: 'Private sellers near you', url: 'https://www.facebook.com/marketplace/la/vehicles' },
+    ],
+    carTools: [
+      { name: 'Kelley Blue Book', note: 'Check a fair price before you offer', url: 'https://www.kbb.com/' },
+      { name: 'CARFAX', note: 'Accident and ownership history', url: 'https://www.carfax.com/' },
+      { name: 'CA DMV · Private sale guide', note: 'Official: title, smog, 10-day transfer', url: 'https://www.dmv.ca.gov/portal/vehicle-registration/new-registration/registering-a-vehicle-purchased-from-a-private-party/' },
+    ],
+    items: [
+      { name: 'Facebook Marketplace', note: 'Furniture and everyday items', url: 'https://www.facebook.com/marketplace/la/' },
+      { name: 'Craigslist LA · For sale', note: 'Everything, local pickup', url: 'https://losangeles.craigslist.org/search/sss' },
+      { name: 'OfferUp', note: 'Buy and sell with ratings', url: 'https://offerup.com/' },
+    ],
+  };
+  const VERIFIED = 'Verified @pepperdine.edu';
+  const LISTINGS = [
+    { id: 'h1', kind: 'housing', type: 'Sublet', title: 'Private room in 2BR, spring semester', place: 'Calabasas', price: 1650, per: '/mo', facts: [['Dates', 'Jan 5 – May 10, 2027'], ['To campus', '15 min drive'], ['Furnished', 'Yes'], ['Utilities', 'Included, Wi-Fi too']], desc: 'I am studying abroad in the spring and need someone to take my room. Quiet grad-student apartment, parking spot included. Landlord has approved subletting.', who: 'Graduate student', ago: '2 days ago' },
+    { id: 'h2', kind: 'housing', type: 'Room', title: 'Room in 3BR house with two grad students', place: 'Woodland Hills', price: 1350, per: '/mo', facts: [['Move in', 'Nov 1, 2026'], ['Lease', '12 months'], ['To campus', '25 min drive'], ['Furnished', 'No']], desc: 'Looking for a clean, quiet housemate. Shared kitchen, backyard, washer and dryer in the house.', who: 'Graduate student', ago: '4 days ago' },
+    { id: 'h3', kind: 'housing', type: 'Lease takeover', title: 'Studio lease takeover near the beach', place: 'Santa Monica', price: 2300, per: '/mo', facts: [['Available', 'Dec 1, 2026'], ['Lease ends', 'Aug 31, 2027'], ['To campus', '35 min drive or Metro bus'], ['Furnished', 'Partly']], desc: 'Moving for an internship. The landlord will do a formal lease transfer after a credit check.', who: 'Undergraduate student', ago: '1 week ago' },
+    { id: 'c1', kind: 'cars', type: 'Car', title: '2016 Toyota Corolla LE', place: 'Malibu', price: 11500, per: '', facts: [['Mileage', '84,000 mi'], ['Title', 'Clean'], ['Smog certificate', 'Provided by seller'], ['Owners', '2']], desc: 'Graduating in December and leaving the U.S. Regular oil changes, new tires this year. Happy to meet at the DMV to transfer.', who: 'Graduating student', ago: '1 day ago' },
+    { id: 'c2', kind: 'cars', type: 'Car', title: '2014 Honda Civic LX', place: 'Agoura Hills', price: 8200, per: '', facts: [['Mileage', '112,000 mi'], ['Title', 'Clean'], ['Smog certificate', 'Will provide'], ['Owners', '3']], desc: 'Reliable commuter car. Small dent on the rear bumper. CARFAX report available.', who: 'Graduate student', ago: '5 days ago' },
+    { id: 'c3', kind: 'cars', type: 'Car', title: '2018 Nissan Sentra SV', place: 'Thousand Oaks', price: 12900, per: '', facts: [['Mileage', '61,000 mi'], ['Title', 'Clean'], ['Smog certificate', 'Provided by seller'], ['Owners', '1']], desc: 'One owner, backup camera, Apple CarPlay. Selling because I am moving back home after OPT.', who: 'Alumni, class of 2025', ago: '1 week ago' },
+    { id: 'i1', kind: 'items', type: 'Furniture', title: 'Desk, chair and lamp set', place: 'Malibu', price: 60, per: '', facts: [['Condition', 'Good'], ['Pickup', 'Campus, by Dec 15']], desc: 'IKEA desk, office chair and lamp. Must go before I move out.', who: 'Graduating student', ago: '3 days ago' },
+    { id: 'i2', kind: 'items', type: 'Furniture', title: 'Queen mattress and bed frame', place: 'Calabasas', price: 120, per: '', facts: [['Condition', 'Like new'], ['Pickup', 'You need a car or van']], desc: 'Mattress is one year old with a protector. Frame comes apart easily.', who: 'Graduate student', ago: '6 days ago' },
+    { id: 'i3', kind: 'items', type: 'Kitchen', title: 'Rice cooker and pots', place: 'Malibu', price: 25, per: '', facts: [['Condition', 'Good'], ['Pickup', 'Campus']], desc: 'Everything you need to cook your first week.', who: 'Undergraduate student', ago: '2 weeks ago' },
+  ];
+  const BOARDS = [['new', 'New students'], ['housing', 'Housing & roommates'], ['cars', 'Cars & rides'], ['visa', 'Visa & OISS'], ['jobs', 'Jobs & internships'], ['events', 'Events & food']];
+  const BOARD = id => (BOARDS.find(b => b[0] === id) || [id, id])[1];
+  const THREADS = [
+    { id: 't1', board: 'visa', title: 'How long does CPT approval take? My internship starts in 3 weeks', body: 'I have an offer letter and I am enrolled in the internship course. Worried I will not get the new I-20 in time.', who: 'Graduate student', ago: '3 h ago', link: 'cpt',
+      replies: [{ who: 'Graduate student', ago: '2 h ago', text: 'Mine took about a week after I submitted everything in the OISS Portal. Submit today.' }, { who: 'OISS staff', staff: true, ago: '1 h ago', text: 'Sample of a school-verified answer: submit the CPT Request form and employer letter as early as possible. You cannot start work until you receive the I-20 that authorizes CPT.' }] },
+    { id: 't2', board: 'housing', title: 'Looking for a roommate near campus for spring', body: 'Grad student, quiet, non-smoker. Budget around $1,400 a month. Calabasas or Woodland Hills preferred.', who: 'Graduate student', ago: '5 h ago',
+      replies: [{ who: 'Graduate student', ago: '4 h ago', text: 'We have a room opening in Woodland Hills in November. I posted it in Market.' }] },
+    { id: 't3', board: 'cars', title: 'Is $8,200 fair for a 2014 Civic with 112k miles?', body: 'First time buying a car in the U.S. What should I check before paying?', who: 'New student', ago: '1 day ago', link: 'car',
+      replies: [{ who: 'Graduate student', ago: '20 h ago', text: 'Check the price on Kelley Blue Book and ask for the CARFAX. Get a mechanic to inspect it, it costs about $100.' }, { who: 'Graduating student', ago: '18 h ago', text: 'Make sure they give you the signed title and a smog certificate. You need both at the DMV.' }] },
+    { id: 't4', board: 'new', title: 'Best phone plan without an SSN?', body: 'Just arrived. Which carrier worked for you without a Social Security number?', who: 'New student', ago: '1 day ago',
+      replies: [{ who: 'Undergraduate student', ago: '1 day ago', text: 'I used a prepaid plan, only needed my passport. You can switch later.' }] },
+    { id: 't5', board: 'cars', title: 'Carpool from Woodland Hills, Mon and Wed mornings?', body: 'Class at 9 a.m. Happy to split gas.', who: 'Graduate student', ago: '2 days ago', replies: [] },
+    { id: 't6', board: 'events', title: 'International student Friendsgiving potluck, who is in?', body: 'Thinking Saturday, Nov 21. Bring a dish from home.', who: 'Undergraduate student', ago: '3 days ago',
+      replies: [{ who: 'Graduate student', ago: '3 days ago', text: 'In! I will bring dumplings.' }, { who: 'New student', ago: '2 days ago', text: 'Count me in.' }] },
+    { id: 't7', board: 'jobs', title: 'Anyone found an OPT job at a startup?', body: 'How did you explain OPT to small companies that have never hired international students?', who: 'Graduating student', ago: '4 days ago', link: 'opt',
+      replies: [{ who: 'Alumni, class of 2025', ago: '3 days ago', text: 'I told them OPT means no sponsorship cost for the first year. The career center has a one-page explainer.' }] },
+  ];
+  const GUIDE = { housing: 'lease', cars: 'car', items: null };
+  const MKT_LABEL = { housing: 'Housing', cars: 'Cars', items: 'Used items' };
+  const MKT_ICON = { housing: 'Housing', cars: 'Car', items: 'tag' };
+  const money = n => '$' + n.toLocaleString('en-US');
+
+  /* ---------- Market views ---------- */
+  function mktDefault() {
+    const a = state.answers, I = a.interests || [];
+    if (state.variant === 'personal') {
+      if (I.includes('housing') || a.housing === 'looking') return 'housing';
+      if (I.includes('transport')) return 'cars';
+    }
+    return 'housing';
+  }
+  function thumb(l, big) {
+    return `<span class="thumb ${l.kind} ${big ? 'big' : ''}" aria-hidden="true">${ic(MKT_ICON[l.kind], big ? 40 : 26, 1.5)}<span class="thumb-tag">${esc(l.type)}</span></span>`;
+  }
+  function listingRow(l) {
+    return `<button class="lrow" data-act="listing" data-id="${l.id}">
+      ${thumb(l)}
+      <span class="t"><span class="price mono">${money(l.price)}<small>${l.per}</small></span><h3>${esc(l.title)}</h3><span class="why">${esc(l.place)} · ${esc(l.facts[0][1])}</span><span class="vbadge">${ic('shield', 12, 2.2)}${esc(l.mine ? 'Your listing' : VERIFIED)}</span></span>
+    </button>`;
+  }
+  function siteRows(list) {
+    return `<div class="list">${list.map(s => `<a class="site" href="${s.url}" target="_blank" rel="noopener" data-act="site"><span class="favicon" aria-hidden="true">${esc(s.name[0])}</span><span class="t"><strong>${esc(s.name)}</strong><span>${esc(s.note)}</span></span>${ic('ext', 16, 2)}</a>`).join('')}</div>`;
+  }
+  function vMarket() {
+    const seg = state.mkt || mktDefault();
+    const a = state.answers, personal = state.variant === 'personal';
+    const listings = state.listings.filter(l => l.kind === seg);
+    let hint = '';
+    if (personal && seg === 'housing' && (a.housing === 'looking' || (a.interests || []).includes('housing'))) hint = 'You said you are looking for housing, so we opened this tab first.';
+    if (personal && seg === 'cars' && (a.interests || []).includes('transport')) hint = 'You asked about getting around. Most students near Malibu need a car or a carpool.';
+    const guideId = GUIDE[seg];
+    const guide = guideId && findTask(guideId);
+    return `<section class="screen">
+      ${appbar()}
+      <div class="row between" style="align-items:flex-end"><div class="stack" style="gap:6px"><span class="eyebrow">Student marketplace</span><h1>Market</h1></div><button class="btn small" data-act="newlisting">${ic('plus', 16, 2.2)}Post</button></div>
+      <div class="seg three" role="group" aria-label="Market section">${['housing', 'cars', 'items'].map(k => `<button data-act="mkt" data-k="${k}" aria-pressed="${seg === k}">${MKT_LABEL[k]}</button>`).join('')}</div>
+      ${hint ? `<div class="callout info"><span class="eyebrow">For you</span><p>${esc(hint)}</p></div>` : ''}
+      ${guide ? `<button class="notice" data-act="open" data-id="${guide.id}"><span class="ic">${ic('tasks', 18)}</span><span class="stack" style="gap:2px;flex:1;min-width:0"><span class="eyebrow" style="font-size:10px">Checklist · ${guide.steps.length} steps</span><h3>${esc(guide.title)}</h3><p>${seg === 'cars' ? 'Title, smog certificate, insurance and the 10-day DMV transfer.' : 'Avoid scams, check the lease, and report your new address.'}</p></span><span class="chev">${ic('chev', 18)}</span></button>` : ''}
+      <div class="group"><div class="group-head"><h2>From Pepperdine students</h2><span class="small muted">${listings.length}</span></div>
+        <p class="small muted" style="padding:0 2px">Only verified students can post here. Sample listings for the prototype.</p>
+        ${listings.length ? `<div class="list">${listings.map(listingRow).join('')}</div>` : '<p class="muted small">No listings yet. Be the first to post.</p>'}
+      </div>
+      <div class="group"><div class="group-head"><h2>Search trusted sites</h2></div>${siteRows(SITES[seg])}</div>
+      ${seg === 'cars' ? `<div class="group"><div class="group-head"><h2>Check before you buy</h2></div>${siteRows(SITES.carTools)}</div>` : ''}
+      <p class="small muted">Outside sites open in a new tab. Saily does not handle payments. Never wire money or pay a deposit for a place you have not seen.</p>
+    </section>`;
+  }
+  function vListing(id) {
+    const l = state.listings.find(x => x.id === id);
+    const guideId = GUIDE[l.kind];
+    return `<section class="screen">
+      ${backbar()}
+      ${thumb(l, true)}
+      <div class="stack" style="gap:6px">
+        <span class="price mono big">${money(l.price)}<small>${l.per}</small></span>
+        <h1 style="font-size:27px">${esc(l.title)}</h1>
+        <span class="small muted">${esc(l.place)} · Posted ${esc(l.ago)}</span>
+      </div>
+      <dl class="list" style="margin:0">${l.facts.map(([k, v]) => `<div class="kv-row"><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+      <p style="font-size:15px">${esc(l.desc)}</p>
+      <div class="seller"><span class="avatar-s" aria-hidden="true">${esc(l.who[0])}</span><span class="stack" style="gap:0"><strong style="font-size:14px">${esc(l.who)}</strong><span class="vbadge">${ic('shield', 12, 2.2)}${VERIFIED}</span></span></div>
+      <div class="callout warn"><span class="eyebrow">Stay safe</span><p>${l.kind === 'cars' ? 'Meet in daylight, see the signed title and smog certificate, and pay only when you transfer ownership.' : l.kind === 'housing' ? 'See the place or do a live video tour before paying. Get the agreement in writing and check the landlord allows it.' : 'Meet on campus in a public place and inspect the item before paying.'}</p></div>
+      ${guideId ? `<button class="btn ghost" data-act="open" data-id="${guideId}">Open the ${l.kind === 'cars' ? 'car-buying' : 'renting'} checklist</button>` : ''}
+      <button class="btn" data-act="message" data-id="${l.id}">${ic('ask', 18, 2)}Message ${l.mine ? 'buyers' : 'the seller'}</button>
+    </section>`;
+  }
+  function vNewListing() {
+    const k = state.mkt || mktDefault();
+    return `<section class="screen">
+      ${backbar()}
+      <div class="stack" style="gap:6px"><span class="eyebrow">Market</span><h1>Post a listing</h1><p class="small muted">Visible only to verified Pepperdine students.</p></div>
+      <form id="listingform" class="stack" style="gap:14px">
+        <label class="field"><span>What are you posting?</span><select id="lf-kind"><option value="housing" ${k === 'housing' ? 'selected' : ''}>Room, sublet or lease takeover</option><option value="cars" ${k === 'cars' ? 'selected' : ''}>Car</option><option value="items" ${k === 'items' ? 'selected' : ''}>Second-hand item</option></select></label>
+        <label class="field"><span>Title</span><input id="lf-title" required maxlength="70" placeholder="e.g. Private room in 2BR, spring semester"></label>
+        <div class="row" style="gap:10px;align-items:stretch"><label class="field" style="flex:1"><span>Price (USD)</span><input id="lf-price" required type="number" min="0" inputmode="numeric" placeholder="1200"></label><label class="field" style="flex:1"><span>Area</span><input id="lf-place" required placeholder="Malibu"></label></div>
+        <label class="field"><span>Details</span><textarea id="lf-desc" rows="4" placeholder="Dates, condition, what is included"></textarea></label>
+        <button class="btn" type="submit">Post listing</button>
+      </form>
+    </section>`;
+  }
+
+  /* ---------- Forum views ---------- */
+  function forumBoardsFor() {
+    const I = state.answers.interests || [], a = state.answers, out = [];
+    if (state.variant !== 'personal') return out;
+    if (a.stage === 'new') out.push('new');
+    if (I.includes('housing') || a.housing === 'looking') out.push('housing');
+    if (I.includes('transport')) out.push('cars');
+    if (I.includes('cpt') || I.includes('opt')) out.push('visa', 'jobs');
+    if (I.includes('social')) out.push('events');
+    return [...new Set(out)];
+  }
+  function threadRow(t) {
+    return `<button class="thread" data-act="thread" data-id="${t.id}">
+      <span class="t"><span class="row" style="gap:6px;flex-wrap:wrap"><span class="cat">${esc(BOARD(t.board))}</span>${t.replies.some(r => r.staff) ? '<span class="pill official">School answered</span>' : ''}</span>
+      <h3>${esc(t.title)}</h3>
+      <span class="why">${esc(t.who)} · ${esc(t.ago)}</span></span>
+      <span class="replies mono">${ic('ask', 15, 2)}${t.replies.length}</span>
+    </button>`;
+  }
+  function vForum() {
+    const b = state.board || 'all';
+    const mine = forumBoardsFor();
+    const list = state.threads.filter(t => b === 'all' || t.board === b);
+    return `<section class="screen">
+      ${appbar()}
+      <div class="row between" style="align-items:flex-end"><div class="stack" style="gap:6px"><span class="eyebrow">Pepperdine international students</span><h1>Forum</h1></div><button class="btn small" data-act="newthread">${ic('plus', 16, 2.2)}Ask</button></div>
+      <div class="chips scroll" role="group" aria-label="Boards"><button class="chip" data-act="board" data-b="all" aria-pressed="${b === 'all'}">All</button>${BOARDS.map(([id, name]) => `<button class="chip" data-act="board" data-b="${id}" aria-pressed="${b === id}">${mine.includes(id) ? '★ ' : ''}${esc(name)}</button>`).join('')}</div>
+      ${mine.length && b === 'all' ? `<p class="small muted" style="padding:0 2px">★ Boards picked from your answers.</p>` : ''}
+      ${b === 'visa' ? `<div class="callout warn"><span class="eyebrow">Student answers are not official advice</span><p>For visa decisions, use the official steps in Tasks or ask OISS.</p></div>` : ''}
+      <div class="list">${list.map(threadRow).join('') || '<p class="muted small" style="padding:16px">No posts yet.</p>'}</div>
+      <p class="small muted">Verified Pepperdine students only. Be kind, no sales outside Market, report posts that break the rules. Sample posts for the prototype.</p>
+    </section>`;
+  }
+  function vThread(id) {
+    const t = state.threads.find(x => x.id === id);
+    const task = t.link && findTask(t.link);
+    return `<section class="screen" id="threadscreen">
+      ${backbar()}
+      <div class="stack" style="gap:8px"><span class="cat">${esc(BOARD(t.board))}</span><h1 style="font-size:25px">${esc(t.title)}</h1></div>
+      <article class="post"><div class="who"><span class="avatar-s" aria-hidden="true">${esc(t.who[0])}</span><span><strong>${esc(t.who)}</strong><span class="small muted"> · ${esc(t.ago)}</span></span></div><p>${esc(t.body)}</p></article>
+      ${task ? `<button class="notice saily" data-act="open" data-id="${task.id}"><span class="ic">${ic('shield', 18)}</span><span class="stack" style="gap:2px;flex:1;min-width:0"><span class="eyebrow" style="font-size:10px">Saily · official guidance</span><h3>${esc(task.title)}</h3><p>Steps and official sources, checked ${CHECKED}.</p></span><span class="chev">${ic('chev', 18)}</span></button>` : ''}
+      <div class="group"><div class="group-head"><span class="eyebrow">${t.replies.length} ${t.replies.length === 1 ? 'reply' : 'replies'}</span></div>
+      ${t.replies.map(r => `<article class="post reply ${r.staff ? 'staff' : ''}"><div class="who"><span class="avatar-s ${r.staff ? 'staffav' : ''}" aria-hidden="true">${esc(r.who[0])}</span><span><strong>${esc(r.who)}</strong>${r.staff ? ' <span class="pill official">School staff</span>' : ''}<span class="small muted"> · ${esc(r.ago)}</span></span></div><p>${esc(r.text)}</p></article>`).join('')}
+      </div>
+    </section>
+    <form class="composer" id="replyform" data-id="${t.id}"><input id="replyinput" placeholder="Write a reply" aria-label="Write a reply" autocomplete="off"><button type="submit" aria-label="Send reply">${ic('send', 18, 2)}</button></form>`;
+  }
+  function vNewThread() {
+    const pre = state.board && state.board !== 'all' ? state.board : (forumBoardsFor()[0] || 'new');
+    return `<section class="screen">
+      ${backbar()}
+      <div class="stack" style="gap:6px"><span class="eyebrow">Forum</span><h1>Ask the community</h1></div>
+      <form id="threadform" class="stack" style="gap:14px">
+        <label class="field"><span>Board</span><select id="tf-board">${BOARDS.map(([id, name]) => `<option value="${id}" ${id === pre ? 'selected' : ''}>${esc(name)}</option>`).join('')}</select></label>
+        <label class="field"><span>Question</span><input id="tf-title" required maxlength="100" placeholder="e.g. Which bank works without an SSN?"></label>
+        <label class="field"><span>Details</span><textarea id="tf-body" rows="5" placeholder="Add context so people can help"></textarea></label>
+        <p class="small muted">Do not share your SEVIS ID, passport number or address.</p>
+        <button class="btn" type="submit">Post question</button>
+      </form>
+    </section>`;
+  }
+
   /* ---------- State ---------- */
   let state;
   function fresh(variant = 'personal', qCount = 6) {
-    return { variant, qCount, screen: 'welcome', tab: 'home', answers: { interests: [] }, qIndex: 0, detail: null, taskFilter: 'todo', done: {}, steps: {}, opened: new Set(), stepsChecked: 0, asked: 0, start: Date.now(), obStart: null, obEnd: null, firstOpen: null, chat: [], query: '', toast: null, prevTab: 'home' };
+    return { variant, qCount, screen: 'welcome', tab: 'home', answers: { interests: [] }, qIndex: 0, detail: null, taskFilter: 'todo', done: {}, steps: {}, opened: new Set(), stepsChecked: 0, asked: 0, start: Date.now(), obStart: null, obEnd: null, firstOpen: null, chat: [], query: '', toast: null, prevTab: 'home', sub: null, mkt: null, board: 'all', listings: LISTINGS.map(l => ({ ...l })), threads: THREADS.map(t => ({ ...t, replies: t.replies.slice() })), mktViews: 0, forumViews: 0, siteClicks: 0, posts: 0 };
   }
   state = fresh();
 
@@ -491,11 +752,17 @@ p { margin: 0; }
       steps: ['Save the campus shuttle schedule', 'Get a TAP card for Metro bus and rail', 'Share your live location with a friend on late trips'],
       sources: [] });
 
-    add({ id: 'lease', cat: 'Housing', title: 'Review your lease before you sign', due: d(12), kind: 'tip',
-      show: I.includes('housing') && a.housing !== 'on', why: 'You asked about housing.',
-      summary: 'Students say the surprises are in deposits, utilities and early-exit fees.',
-      steps: ['Confirm the deposit amount and when it is returned', 'Ask which utilities are included', 'Read the early termination clause', 'Take move-in photos of every room'],
-      sources: [] });
+    add({ id: 'lease', cat: 'Housing', title: 'Rent or sublet safely', due: d(12), kind: 'official',
+      show: (I.includes('housing') || a.housing === 'looking' || a.stage === 'new') && a.housing !== 'on', why: a.housing === 'looking' ? 'You are still looking for a place.' : a.stage === 'new' ? 'You are new and may need off-campus housing.' : 'You asked about housing.',
+      summary: 'Rental scams often target new students who cannot see a place in person. Take a few checks before you pay, and report your new address after you move.',
+      steps: ['See the place, or do a live video tour, before paying anything', 'Never wire money, send gift cards or pay a deposit to hold an unseen place', 'For a sublet, confirm in writing that the landlord allows it', 'Read the deposit, utilities and early-exit terms, then sign a written agreement', 'Take dated photos of every room when you move in', 'Report your new address to OISS within 10 days'],
+      sources: [S.ftcRent, S.pepCur] });
+
+    add({ id: 'car', cat: 'Car', title: 'Buy a used car safely in California', due: d(25), kind: 'official',
+      show: I.includes('transport') || a.stage === 'new', why: I.includes('transport') ? 'You asked about getting around. Campus is hard to reach without a car.' : 'You are new, and most students near Malibu need a car or a carpool.',
+      summary: 'Buying from another student or a private seller is often cheaper, but you handle the paperwork. In California the buyer has 10 days to transfer ownership at the DMV.',
+      steps: ['Set a budget that includes insurance, registration and repairs', 'Check a fair price on Kelley Blue Book and get the CARFAX history', 'Have a mechanic inspect the car before you agree on a price', 'Get the signed title and a valid smog certificate from the seller', 'Buy insurance before you drive. Compare quotes, since you may not have U.S. credit history', 'Transfer ownership at the DMV within 10 days of buying', 'Ask the DMV whether you need a California driver license'],
+      sources: [S.dmvPrivate, S.dmvSmog] });
 
     add({ id: 'career', cat: 'Career', title: 'Book a career center appointment', due: d(18), kind: 'tip',
       show: a.stage === 'graduating' || I.includes('cpt') || I.includes('opt'), why: 'You are planning work in the U.S.',
@@ -512,7 +779,7 @@ p { margin: 0; }
     return T;
   }
 
-  const GENERIC_IDS = ['checkin', 'cpt', 'opt', 'address', 'register', 'insurance', 'tax', 'bank', 'phone', 'lease', 'career'];
+  const GENERIC_IDS = ['checkin', 'cpt', 'opt', 'address', 'register', 'insurance', 'tax', 'bank', 'phone', 'lease', 'car', 'career'];
 
   function visibleTasks() {
     const a = state.answers, personal = state.variant === 'personal';
@@ -549,6 +816,11 @@ p { margin: 0; }
     'Getting around': '<rect x="5" y="3.5" width="14" height="13.5" rx="3"/><path d="M5 10.5h14M8.5 17v3M15.5 17v3"/><circle cx="8.5" cy="13.8" r=".6"/><circle cx="15.5" cy="13.8" r=".6"/>',
     Housing: '<path d="M4 10.5 12 4l8 6.5M6 9v11h12V9"/><path d="M10 20v-5h4v5"/>',
     Career: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/>',
+    Car: '<path d="M4.5 16.5V12l2-5.2A2 2 0 0 1 8.4 5.5h7.2a2 2 0 0 1 1.9 1.3l2 5.2v4.5"/><path d="M3.5 12h17v4.5h-17zM6 16.5V19M18 16.5V19"/><circle cx="7.5" cy="14.3" r=".9"/><circle cx="16.5" cy="14.3" r=".9"/>',
+    tag: '<path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7l8.3 8.3a1.5 1.5 0 0 1 0 2.1l-6.2 6.2a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8" cy="8" r="1.5"/>',
+    market: '<path d="M4 9.5 5.5 4h13L20 9.5M4 9.5h16M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 11.5V20h13v-8.5M10 20v-4.5h4V20"/>',
+    forum: '<path d="M3.5 5.5a1.5 1.5 0 0 1 1.5-1.5h9a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H8.5l-3.5 3v-3a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M15.5 8.5H19a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5v3l-3.5-3h-5a1.5 1.5 0 0 1-1.5-1.5V15"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
     Community: '<circle cx="9" cy="8.5" r="3"/><path d="M3.5 19.5c.6-3 2.8-5 5.5-5s4.9 2 5.5 5"/><path d="M15.5 5.8a3 3 0 1 1 1 5.6M20.5 19.5c-.3-2-1.3-3.5-3-4.4"/>',
   };
   const ic = (name, size = 20, sw = 1.8) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[name] || P.Visa}</svg>`;
@@ -580,7 +852,7 @@ p { margin: 0; }
     return `<header class="appbar">
       <div class="wordmark"><b>Saily</b><span>Pepperdine</span></div>
       <div class="row" style="gap:8px">
-        <button class="iconbtn" data-act="tab" data-tab="tasks" aria-label="Reminders">${ic('bell', 19)}${urgent ? '<span class="dot"></span>' : ''}</button>
+        <button class="iconbtn" data-act="tab" data-tab="explore" aria-label="Search all topics">${ic('explore', 19)}</button>
         <button class="iconbtn" data-act="tab" data-tab="profile" aria-label="Profile">${ic('profile', 19)}</button>
       </div>
     </header>`;
@@ -588,14 +860,20 @@ p { margin: 0; }
   const backbar = () => `<div class="backbar"><button class="back" data-act="close">${ic('back', 20, 2)}Back</button></div>`;
   function tabbar() {
     const urgent = state.variant === 'personal' ? visibleTasks().filter(t => !state.done[t.id] && daysTo(t.due) <= 7).length : 0;
-    const tabs = [['home', 'Home'], ['tasks', state.variant === 'personal' ? 'Tasks' : 'Checklist'], ['explore', 'Explore'], ['ask', 'Saily'], ['profile', 'Profile']];
-    return `<nav class="tabbar">${tabs.map(([k, l]) => `<button data-act="tab" data-tab="${k}" ${state.tab === k && !state.detail ? 'aria-current="page"' : ''}><span class="pillwrap">${ic(k, 22)}${k === 'tasks' && urgent ? `<span class="count">${urgent}</span>` : ''}</span>${l}</button>`).join('')}</nav>`;
+    const tabs = [['home', 'Home'], ['tasks', state.variant === 'personal' ? 'Tasks' : 'Checklist'], ['market', 'Market'], ['forum', 'Forum'], ['ask', 'Saily']];
+    return `<nav class="tabbar">${tabs.map(([k, l]) => `<button data-act="tab" data-tab="${k}" ${state.tab === k && !state.detail && !state.sub ? 'aria-current="page"' : ''}><span class="pillwrap">${ic(k, 22)}${k === 'tasks' && urgent ? `<span class="count">${urgent}</span>` : ''}</span>${l}</button>`).join('')}</nav>`;
   }
   const dsNotice = () => `<button class="notice" data-act="article" data-id="ds">
       <span class="ic">${ic('scale', 18)}</span>
       <span class="stack" style="gap:2px;flex:1;min-width:0"><span class="eyebrow" style="font-size:10px">Rule update · ${CHECKED}</span><h3>New visa-stay rule is on hold</h3><p>A court paused the DHS “duration of status” rule. Current rules still apply.</p></span>
       <span class="chev">${ic('chev', 18)}</span>
     </button>`;
+  const quickRow = () => `<div class="quick">
+      <button data-act="go" data-tab="market" data-k="housing"><span class="tile">${ic('Housing', 22)}</span>Housing</button>
+      <button data-act="go" data-tab="market" data-k="cars"><span class="tile">${ic('Car', 22)}</span>Cars</button>
+      <button data-act="go" data-tab="market" data-k="items"><span class="tile">${ic('tag', 22)}</span>Used items</button>
+      <button data-act="go" data-tab="forum"><span class="tile">${ic('forum', 22)}</span>Forum</button>
+    </div>`;
   const DOW = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
   /* ---------- Screens ---------- */
@@ -648,6 +926,7 @@ p { margin: 0; }
       return `<section class="screen">
         ${appbar()}
         <div class="stack" style="gap:6px"><span class="eyebrow">International students</span><h1>Resources</h1></div>
+        ${quickRow()}
         <button class="search" data-act="tab" data-tab="explore" style="text-align:left;border:0">${ic('explore', 19)}<span class="small">Search topics, e.g. OPT, housing</span></button>
         <div class="group"><div class="group-head"><h2>Topics</h2></div><div class="topics">${cats.map(c => `<button class="topic" data-act="cat" data-cat="${esc(c)}"><span class="tile">${ic(c, 19)}</span><span><strong>${esc(c)}</strong><span>${all.filter(t => t.cat === c).length} articles</span></span></button>`).join('')}</div></div>
         <div class="group"><div class="group-head"><h2>Popular</h2></div>${list(all.slice(0, 5).map(t => item(t, { summary: true })))}</div>
@@ -675,6 +954,7 @@ p { margin: 0; }
       ${appbar()}
       <div class="stack" style="gap:6px"><span class="eyebrow">${DOW[TODAY.getDay()]}, ${fmt(TODAY)} · ${esc(a.visa || '')} ${esc(LABEL('stage')(a.stage).toLowerCase())}</span><h1>${greeting}</h1></div>
       ${heroHTML}
+      ${quickRow()}
       ${showDS() ? dsNotice() : ''}
       ${week.length ? `<div class="group"><div class="group-head"><h2>This week</h2><span class="small muted">${week.length} due</span></div>${list(week.map(t => item(t)))}</div>` : ''}
       ${later.length ? `<div class="group"><div class="group-head"><h2>Coming up</h2><button class="linkbtn" data-act="tab" data-tab="tasks">All ${todo.length}${ic('chev', 14, 2.2)}</button></div>${list(later.map(t => item(t)))}</div>` : ''}
@@ -778,7 +1058,7 @@ p { margin: 0; }
   }
 
   /* ---------- Saily ---------- */
-  const SUGGEST = ['Am I eligible for CPT?', 'When can I apply for OPT?', 'I moved. What do I report?', 'Do I need to file taxes?', 'What happened to the visa-stay rule?'];
+  const SUGGEST = ['Am I eligible for CPT?', 'When can I apply for OPT?', 'How do I buy a used car?', 'I moved. What do I report?', 'Do I need to file taxes?', 'What happened to the visa-stay rule?'];
   function answer(text) {
     const a = state.answers, personal = state.variant === 'personal';
     const t = text.toLowerCase();
@@ -801,7 +1081,8 @@ p { margin: 0; }
     if (/rule|duration|d\/s|grace|status/.test(t)) return { html: `<p>A federal court postponed the new DHS rule on Sep 14, 2026. For now, “duration of status” continues and F-1 students keep the 60-day grace period. Check with OISS before travel or filings related to this rule.</p>`, sources: [S.ds, S.dsDHS] };
     if (/insur|health|doctor/.test(t)) return { html: `<p>Check that you are enrolled in, or have waived, the school insurance plan this term, and save your insurance card on your phone.</p>`, sources: [S.pepIntl], task: 'insurance' };
     if (/bank|phone|sim/.test(t)) return { html: `<p>Many banks open student accounts with a passport and I-20. For a phone, a prepaid plan is fastest. These are tips from students, not official guidance.</p>`, sources: [], task: 'bank' };
-    if (/hous|lease|rent|apartment/.test(t)) return { html: `<p>Before signing, confirm the deposit, which utilities are included and the early-exit fee. After you move, report your address within 10 days.</p>`, sources: [S.pepCur], task: 'lease' };
+    if (/car|vehicle|drive|dmv/.test(t)) return { html: `<p>Check the price on Kelley Blue Book, get the CARFAX, and have a mechanic look at it. From the seller you need the <strong>signed title and a smog certificate</strong>, and you have <strong>10 days</strong> to transfer ownership at the DMV. Student listings and trusted car sites are in <strong>Market</strong>.</p>`, sources: [S.dmvPrivate], task: 'car' };
+    if (/hous|lease|rent|apartment|sublet|roommate/.test(t)) return { html: `<p>See the place before paying, never wire a deposit, and get the agreement in writing. After you move, report your address to OISS within 10 days. Student sublets and trusted rental sites are in <strong>Market</strong>.</p>`, sources: [S.ftcRent, S.pepCur], task: 'lease' };
     return { html: `<p>I can’t answer that reliably yet. For visa questions, please ask OISS directly: <span class="mono">oiss@pepperdine.edu</span> or <span class="mono">310.506.4246</span>.</p>`, sources: [] };
   }
   function vAsk() {
@@ -841,12 +1122,14 @@ p { margin: 0; }
       let body;
       if (state.detail === 'ds') body = vArticleDS();
       else if (state.detail) body = vDetail();
-      else body = { home: vHome, tasks: vTasks, explore: vExplore, ask: vAsk, profile: vProfile }[state.tab]();
+      else if (state.sub) body = state.sub.type === 'listing' ? vListing(state.sub.id) : state.sub.type === 'thread' ? vThread(state.sub.id) : state.sub.type === 'newlisting' ? vNewListing() : vNewThread();
+      else body = { home: vHome, tasks: vTasks, market: vMarket, forum: vForum, explore: vExplore, ask: vAsk, profile: vProfile }[state.tab]();
       html = '<div class="brandbar" aria-hidden="true"></div>' + body + tabbar();
     }
     if (state.toast) html += `<div class="toast" role="status">${esc(state.toast)}</div>`;
     app.innerHTML = html;
     const cs = document.getElementById('chatscreen'); if (cs) cs.scrollTop = cs.scrollHeight;
+    if (state.scrollThread) { const ts = document.getElementById('threadscreen'); if (ts) ts.scrollTop = ts.scrollHeight; state.scrollThread = false; }
     metrics();
   }
   function toast(msg) { state.toast = msg; render(); clearTimeout(toast.t); toast.t = setTimeout(() => { state.toast = null; render(); }, 1600); }
@@ -871,13 +1154,22 @@ p { margin: 0; }
       if (state.qIndex < keys.length - 1) state.qIndex++;
       else { state.obEnd = state.obEnd || Date.now(); state.screen = 'main'; state.tab = 'home'; }
     } else if (act === 'qback') { state.qIndex = Math.max(0, state.qIndex - 1); }
-    else if (act === 'tab') { state.tab = b.dataset.tab; state.detail = null; if (b.dataset.tab === 'explore' && state.query === 'All') state.query = ''; }
+    else if (act === 'tab') { state.tab = b.dataset.tab; state.detail = null; state.sub = null; if (b.dataset.tab === 'explore' && state.query === 'All') state.query = ''; }
     else if (act === 'open') {
       state.detail = b.dataset.id; state.opened.add(b.dataset.id);
       if (!state.firstOpen) state.firstOpen = Date.now();
     }
     else if (act === 'article') { state.detail = b.dataset.id; }
-    else if (act === 'close') { state.detail = null; }
+    else if (act === 'close') { if (state.detail) state.detail = null; else state.sub = null; }
+    else if (act === 'go') { state.tab = b.dataset.tab; state.detail = null; state.sub = null; if (b.dataset.k) state.mkt = b.dataset.k; }
+    else if (act === 'mkt') { state.mkt = b.dataset.k; }
+    else if (act === 'listing') { state.sub = { type: 'listing', id: b.dataset.id }; state.mktViews++; }
+    else if (act === 'newlisting') { state.sub = { type: 'newlisting' }; }
+    else if (act === 'message') { toast('Message sent to the seller (demo)'); return; }
+    else if (act === 'site') { state.siteClicks++; metrics(); return; }
+    else if (act === 'board') { state.board = b.dataset.b; }
+    else if (act === 'thread') { state.sub = { type: 'thread', id: b.dataset.id }; state.forumViews++; }
+    else if (act === 'newthread') { state.sub = { type: 'newthread' }; }
     else if (act === 'step') {
       const id = b.dataset.id, i = +b.dataset.i;
       const arr = state.steps[id] = state.steps[id] || [];
@@ -893,7 +1185,7 @@ p { margin: 0; }
     else if (act === 'edit') { state.screen = 'onboarding'; state.qIndex = 0; }
     else if (act === 'restart') { state = fresh(state.variant, state.qCount); }
     render();
-    if (['open', 'close', 'tab', 'article', 'qnext', 'start'].includes(act)) scrollTop();
+    if (['open', 'close', 'tab', 'article', 'qnext', 'start', 'go', 'listing', 'thread', 'newlisting', 'newthread', 'mkt'].includes(act)) scrollTop();
   });
   app.addEventListener('input', e => {
     if (e.target.id !== 'q') return;
@@ -902,7 +1194,27 @@ p { margin: 0; }
     app.querySelectorAll('[data-act="qcat"]').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.cat === 'All' ? !state.query : c.dataset.cat === state.query)));
   });
   app.addEventListener('submit', e => {
-    if (e.target.id !== 'composer') return;
+    const f = e.target, val = id => (document.getElementById(id).value || '').trim();
+    if (f.id === 'listingform') {
+      e.preventDefault();
+      const kind = val('lf-kind'), id = 'u' + Date.now();
+      const type = { housing: 'Sublet', cars: 'Car', items: 'Item' }[kind];
+      state.listings.unshift({ id, kind, type, title: val('lf-title'), place: val('lf-place'), price: Number(val('lf-price')) || 0, per: kind === 'housing' ? '/mo' : '', facts: [['Posted', 'Just now'], ['Area', val('lf-place')]], desc: val('lf-desc') || 'No details yet.', who: 'You', ago: 'just now', mine: true });
+      state.posts++; state.mkt = kind; state.sub = { type: 'listing', id }; toast('Listing posted'); scrollTop(); return;
+    }
+    if (f.id === 'threadform') {
+      e.preventDefault();
+      const id = 'u' + Date.now();
+      state.threads.unshift({ id, board: val('tf-board'), title: val('tf-title'), body: val('tf-body') || '', who: 'You', ago: 'just now', replies: [] });
+      state.posts++; state.board = 'all'; state.sub = { type: 'thread', id }; toast('Question posted'); scrollTop(); return;
+    }
+    if (f.id === 'replyform') {
+      e.preventDefault();
+      const text = val('replyinput'); if (!text) return;
+      state.threads.find(t => t.id === f.dataset.id).replies.push({ who: 'You', ago: 'just now', text });
+      state.posts++; state.scrollThread = true; render(); return;
+    }
+    if (f.id !== 'composer') return;
     e.preventDefault();
     const v = document.getElementById('askinput').value.trim();
     if (v) ask(v);
@@ -928,6 +1240,10 @@ p { margin: 0; }
     $('m-open').textContent = state.opened.size;
     $('m-steps').textContent = state.stepsChecked;
     $('m-ask').textContent = state.asked;
+    $('m-mkt').textContent = state.mktViews;
+    $('m-forum').textContent = state.forumViews;
+    $('m-sites').textContent = state.siteClicks;
+    $('m-posts').textContent = state.posts;
     $('m-first').textContent = state.firstOpen ? mmss(state.firstOpen - state.start) : '–';
     $('qcount-set').style.opacity = state.variant === 'generic' ? .45 : 1;
   }
@@ -952,6 +1268,7 @@ p { margin: 0; }
       `Steps checked: ${state.stepsChecked}`,
       `Tasks marked done: ${Object.keys(state.done).filter(k => state.done[k]).join(', ') || 'none'}`,
       `Questions to Saily: ${state.asked}`,
+      `Listings opened: ${state.mktViews} · Forum threads opened: ${state.forumViews} · Outside sites clicked: ${state.siteClicks} · Posts: ${state.posts}`,
       state.variant === 'personal' ? `Profile: ${Object.entries(a).map(([k, v]) => `${k}=${Array.isArray(v) ? v.join('+') : v}`).join('; ')}` : '',
       'Relevance rating (1-5): ', 'Trust rating (1-5): ', 'Notes: ',
     ].filter(Boolean).join('\n');
