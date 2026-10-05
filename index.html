@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Saily for Pepperdine</title>
+<title>UniHub for Pepperdine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Crimson+Pro:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -116,7 +116,7 @@ p { margin: 0; }
 .welcome p { opacity: .86; font-size: 16px; max-width: 28ch; }
 .welcome .btn { background: var(--brand-accent); color: var(--brand-ink); }
 .welcome .rule { width: 40px; height: 3px; background: var(--brand-accent); border-radius: 2px; }
-.welcome .fineprint { font-size: 11.5px; opacity: .62; text-align: center; }
+.welcome .fineprint { font-size: 11.5px; opacity: .62; text-align: center; max-width: none; }
 .waves { position: absolute; left: -20px; right: -20px; bottom: 170px; height: 120px; color: var(--sky); opacity: .5; pointer-events: none; }
 .waves path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
 
@@ -168,7 +168,7 @@ p { margin: 0; }
 .item { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%; text-align: left; background: none; border: 0; padding: 13px 14px; position: relative; }
 .item + .item::before { content: ""; position: absolute; top: 0; left: 64px; right: 0; height: 1px; background: var(--line); }
 .item:hover { background: color-mix(in srgb, var(--primary-soft) 45%, transparent); }
-.tile { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--primary-soft); color: var(--primary); }
+.tile { flex: none; width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--primary-soft); color: var(--primary); }
 .tile.tip { background: color-mix(in srgb, var(--stone) 18%, transparent); color: var(--muted); }
 .tile.big { width: 46px; height: 46px; border-radius: 13px; }
 .item .t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -323,6 +323,27 @@ p { margin: 0; }
 .avatar-s.staffav { background: var(--ok); }
 .notice.saily { box-shadow: inset 0 0 0 1.5px var(--primary); }
 
+/* ---------- Toggles ---------- */
+.toggle { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%; text-align: left; background: none; border: 0; padding: 13px 16px; position: relative; }
+.toggle + .toggle::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--line); }
+.toggle .t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.toggle strong { font-size: 14px; }
+.toggle .t span { font-size: 12px; color: var(--muted); }
+.switch { width: 44px; height: 26px; border-radius: 13px; background: color-mix(in srgb, var(--stone) 45%, transparent); position: relative; transition: background .15s; }
+.switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0, 0, 0, .25); transition: transform .15s; }
+.toggle[aria-pressed="true"] .switch { background: var(--ok); }
+.toggle[aria-pressed="true"] .switch::after { transform: translateX(18px); }
+
+/* ---------- Journey (console) ---------- */
+.journey { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.journey li { position: relative; padding: 0 0 14px 22px; font-size: 13px; }
+.journey li::before { content: ""; position: absolute; left: 4px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: var(--primary); }
+.journey li::after { content: ""; position: absolute; left: 8px; top: 16px; bottom: 0; width: 1px; background: var(--line); }
+.journey li:last-child { padding-bottom: 0; }
+.journey li:last-child::before { background: var(--brand-accent); }
+.journey li:last-child::after { display: none; }
+.journey b { display: block; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
 /* ---------- Home quick actions ---------- */
 .quick { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .quick button { display: flex; flex-direction: column; align-items: center; gap: 6px; background: none; border: 0; padding: 4px 0; font-size: 12px; font-weight: 700; color: var(--ink); }
@@ -346,7 +367,7 @@ p { margin: 0; }
 </head>
 <body>
 <div class="desk">
-  <main class="device" aria-label="Saily app prototype">
+  <main class="device" aria-label="UniHub app prototype">
     <div id="app" style="display:contents"></div>
   </main>
 
@@ -373,6 +394,16 @@ p { margin: 0; }
     </div>
 
     <div class="panel">
+      <p class="eyebrow">What changed and why</p>
+      <ol class="journey">
+        <li><b>Week 2 · Opportunity Brief</b>We assumed the problem was scattered information, so we planned one web hub for everyone.</li>
+        <li><b>Week 4 · 5 student interviews</b>Students wanted to know what applies to them and what to do next. We moved to a personalized, mobile app built around tasks and deadlines.</li>
+        <li><b>Week 5 · Feedback Studio</b>Classmates and the instructor asked for peer Q&amp;A, housing, cars and used items. We added the Market and Forum, each tied to checklists.</li>
+        <li><b>Week 6 · Final</b>Renamed UniHub. Focused on incoming and exchange students, turned school emails into tasks, and added privacy controls.</li>
+      </ol>
+    </div>
+
+    <div class="panel">
       <p class="eyebrow">Suggested task for the participant</p>
       <p class="script">1. "You have an internship offer. Find out what you must do before you start, and by when."<br>2. "You need a room for spring. Find one option and what to check before paying."<br>3. "Ask other students whether a used-car price is fair."</p>
     </div>
@@ -385,7 +416,7 @@ p { margin: 0; }
         <dt>Questions answered</dt><dd id="m-q">0</dd>
         <dt>Tasks opened</dt><dd id="m-open">0</dd>
         <dt>Steps checked</dt><dd id="m-steps">0</dd>
-        <dt>Questions to Saily</dt><dd id="m-ask">0</dd>
+        <dt>Questions to the assistant</dt><dd id="m-ask">0</dd>
         <dt>Listings opened</dt><dd id="m-mkt">0</dd>
         <dt>Forum threads opened</dt><dd id="m-forum">0</dd>
         <dt>Outside sites clicked</dt><dd id="m-sites">0</dd>
@@ -426,6 +457,8 @@ p { margin: 0; }
     ds: { label: 'NYU Global Services: D/S rule status', url: 'https://www.nyu.edu/about/leadership-university-administration/organization-directory/office-of-global-services/immigration-news-and-updates/changes-to-duration-of-status-FAQ.html' },
     dsDHS: { label: 'Study in the States: Fixed admission rule', url: 'https://studyinthestates.dhs.gov/final-rule-establishing-a-fixed-time-period-of-admission-and-an-extension-of-stay-procedure-quick' },
     j1: { label: 'U.S. Department of State: J-1 Visa', url: 'https://j1visa.state.gov/' },
+    ucbF1: { label: 'UC Berkeley International Office: F-1 regulations', url: 'https://internationaloffice.berkeley.edu/students/current/f-1/regulations' },
+    j1ins: { label: 'University of Utah ISSS: J-1 insurance requirements', url: 'https://isss.utah.edu/j-1-visa-program/maintaining-status/health-insurance/index.php' },
     ftcRent: { label: 'FTC: Rental listing scams', url: 'https://consumer.ftc.gov/articles/rental-listing-scams' },
     dmvPrivate: { label: 'California DMV: Buying from a private party', url: 'https://www.dmv.ca.gov/portal/vehicle-registration/new-registration/registering-a-vehicle-purchased-from-a-private-party/' },
     dmvSmog: { label: 'California DMV: Smog inspections', url: 'https://www.dmv.ca.gov/portal/vehicle-registration/smog-inspections/' },
@@ -434,7 +467,7 @@ p { margin: 0; }
   /* ---------- Onboarding questions ---------- */
   const Q = {
     school: { title: 'Which school do you attend?', sub: 'We load your school’s offices, forms and deadlines.', options: [['pepperdine', 'Pepperdine University', 'Malibu, California'], ['other', 'Another university', 'Demo shows Pepperdine content']] },
-    stage: { title: 'Where are you in your program?', sub: 'This decides which tasks come first.', options: [['new', 'New student', 'First term in the U.S.'], ['current', 'Continuing student', 'Mid-program'], ['graduating', 'Graduating this year', 'Final or next-to-last term'], ['unsure', 'I’m not sure yet', '']] },
+    stage: { title: 'Where are you in your program?', sub: 'This decides which tasks come first.', options: [['arriving', 'Arriving soon', 'Before my first term'], ['new', 'New student', 'First term in the U.S.'], ['exchange', 'Exchange student', 'One or two terms at Pepperdine'], ['current', 'Continuing student', 'Mid-program'], ['graduating', 'Graduating this year', 'Final or next-to-last term'], ['unsure', 'I’m not sure yet', '']] },
     visa: { title: 'What is your visa status?', sub: 'Work rules differ between F-1 and J-1.', options: [['F-1', 'F-1 student', ''], ['J-1', 'J-1 exchange visitor', ''], ['other', 'Other, or not sure', '']] },
     interests: { title: 'What do you need help with right now?', sub: 'Select up to 3.', multi: 3, options: [['cpt', 'Internship / CPT', ''], ['opt', 'OPT / after graduation', ''], ['housing', 'Housing', ''], ['academics', 'Courses and registration', ''], ['transport', 'Car or getting around', ''], ['daily', 'Banking and phone', ''], ['health', 'Health insurance', ''], ['social', 'Meeting people', ''], ['market', 'Buying and selling used stuff', '']] },
     level: { title: 'What level is your program?', sub: 'Some rules differ for graduate students.', options: [['ug', 'Undergraduate', ''], ['masters', 'Master’s', ''], ['phd', 'Doctoral', ''], ['exchange', 'Exchange or non-degree', '']] },
@@ -548,7 +581,7 @@ p { margin: 0; }
       </div>
       <div class="group"><div class="group-head"><h2>Search trusted sites</h2></div>${siteRows(SITES[seg])}</div>
       ${seg === 'cars' ? `<div class="group"><div class="group-head"><h2>Check before you buy</h2></div>${siteRows(SITES.carTools)}</div>` : ''}
-      <p class="small muted">Outside sites open in a new tab. Saily does not handle payments. Never wire money or pay a deposit for a place you have not seen.</p>
+      <p class="small muted">Outside sites open in a new tab. UniHub does not handle payments. Never wire money or pay a deposit for a place you have not seen.</p>
     </section>`;
   }
   function vListing(id) {
@@ -589,7 +622,7 @@ p { margin: 0; }
   function forumBoardsFor() {
     const I = state.answers.interests || [], a = state.answers, out = [];
     if (state.variant !== 'personal') return out;
-    if (a.stage === 'new') out.push('new');
+    if (['arriving', 'new', 'exchange'].includes(a.stage)) out.push('new');
     if (I.includes('housing') || a.housing === 'looking') out.push('housing');
     if (I.includes('transport')) out.push('cars');
     if (I.includes('cpt') || I.includes('opt')) out.push('visa', 'jobs');
@@ -625,7 +658,7 @@ p { margin: 0; }
       ${backbar()}
       <div class="stack" style="gap:8px"><span class="cat">${esc(BOARD(t.board))}</span><h1 style="font-size:25px">${esc(t.title)}</h1></div>
       <article class="post"><div class="who"><span class="avatar-s" aria-hidden="true">${esc(t.who[0])}</span><span><strong>${esc(t.who)}</strong><span class="small muted"> · ${esc(t.ago)}</span></span></div><p>${esc(t.body)}</p></article>
-      ${task ? `<button class="notice saily" data-act="open" data-id="${task.id}"><span class="ic">${ic('shield', 18)}</span><span class="stack" style="gap:2px;flex:1;min-width:0"><span class="eyebrow" style="font-size:10px">Saily · official guidance</span><h3>${esc(task.title)}</h3><p>Steps and official sources, checked ${CHECKED}.</p></span><span class="chev">${ic('chev', 18)}</span></button>` : ''}
+      ${task ? `<button class="notice saily" data-act="open" data-id="${task.id}"><span class="ic">${ic('shield', 18)}</span><span class="stack" style="gap:2px;flex:1;min-width:0"><span class="eyebrow" style="font-size:10px">UniHub · official guidance</span><h3>${esc(task.title)}</h3><p>Steps and official sources, checked ${CHECKED}.</p></span><span class="chev">${ic('chev', 18)}</span></button>` : ''}
       <div class="group"><div class="group-head"><span class="eyebrow">${t.replies.length} ${t.replies.length === 1 ? 'reply' : 'replies'}</span></div>
       ${t.replies.map(r => `<article class="post reply ${r.staff ? 'staff' : ''}"><div class="who"><span class="avatar-s ${r.staff ? 'staffav' : ''}" aria-hidden="true">${esc(r.who[0])}</span><span><strong>${esc(r.who)}</strong>${r.staff ? ' <span class="pill official">School staff</span>' : ''}<span class="small muted"> · ${esc(r.ago)}</span></span></div><p>${esc(r.text)}</p></article>`).join('')}
       </div>
@@ -650,7 +683,7 @@ p { margin: 0; }
   /* ---------- State ---------- */
   let state;
   function fresh(variant = 'personal', qCount = 6) {
-    return { variant, qCount, screen: 'welcome', tab: 'home', answers: { interests: [] }, qIndex: 0, detail: null, taskFilter: 'todo', done: {}, steps: {}, opened: new Set(), stepsChecked: 0, asked: 0, start: Date.now(), obStart: null, obEnd: null, firstOpen: null, chat: [], query: '', toast: null, prevTab: 'home', sub: null, mkt: null, board: 'all', listings: LISTINGS.map(l => ({ ...l })), threads: THREADS.map(t => ({ ...t, replies: t.replies.slice() })), mktViews: 0, forumViews: 0, siteClicks: 0, posts: 0 };
+    return { variant, qCount, screen: 'welcome', tab: 'home', answers: { interests: [] }, qIndex: 0, detail: null, taskFilter: 'todo', done: {}, steps: {}, opened: new Set(), stepsChecked: 0, asked: 0, start: Date.now(), obStart: null, obEnd: null, firstOpen: null, chat: [], query: '', toast: null, prevTab: 'home', sub: null, mkt: null, board: 'all', listings: LISTINGS.map(l => ({ ...l })), threads: THREADS.map(t => ({ ...t, replies: t.replies.slice() })), mktViews: 0, forumViews: 0, siteClicks: 0, posts: 0, priv: { visa: true, push: true, forum: false } };
   }
   state = fresh();
 
@@ -665,17 +698,36 @@ p { margin: 0; }
     const f1 = a.visa === 'F-1' || a.visa === 'other' || !a.visa;
     const j1 = a.visa === 'J-1';
     const I = a.interests || [];
+    const newish = ['arriving', 'new', 'exchange'].includes(a.stage);
     const T = [];
     const add = t => T.push(t);
 
+    add({ id: 'arrive', cat: 'Visa', title: 'Plan your arrival date and travel documents', due: d(10), kind: 'official',
+      show: a.stage === 'arriving', why: 'You have not arrived yet.',
+      summary: 'New F-1 students may enter the U.S. up to 30 days before the program start date on the I-20, and no later than that date. J-1 students check the start date on the DS-2019 and ask their sponsor.',
+      steps: ['Find the program start date on your I-20 or DS-2019', 'Book a flight that lands no more than 30 days before that date', 'Pack in your carry-on: passport, I-20 or DS-2019, admission letter, SEVIS fee receipt and financial documents', 'Arrange your first nights of housing and a ride from LAX', 'After you land, download your I-94 record and complete OISS check-in'],
+      sources: [S.ucbF1, S.i94, S.pepIntl] });
+
+    add({ id: 'j1ins', cat: 'Health', title: 'Keep J-1 health insurance for your whole program', due: d(7), kind: 'official',
+      show: j1 && (newish || I.includes('health')), why: 'J-1 exchange visitors must stay insured with no gaps.',
+      summary: 'J-1 rules set minimums: $100,000 medical coverage per accident or illness, a deductible of $500 or less, $50,000 medical evacuation and $25,000 repatriation. Coverage must last the entire program.',
+      steps: ['Check whether the school plan meets the J-1 minimums', 'Make sure coverage starts the day you arrive and has no gaps', 'Insure any J-2 dependents too', 'Save proof of coverage on your phone'],
+      sources: [S.j1ins, S.j1] });
+
+    add({ id: 'credits', cat: 'Academics', title: 'Get your exchange courses approved at home', due: d(14), kind: 'tip',
+      show: a.stage === 'exchange', why: 'You are an exchange student.',
+      summary: 'Most exchange students need written approval from their home university so Pepperdine credits transfer back.',
+      steps: ['Send your Pepperdine course list to your home advisor', 'Get written approval before the add/drop deadline', 'Save each syllabus for the credit review'],
+      sources: [] });
+
     add({ id: 'checkin', cat: 'Visa', title: 'Complete your OISS immigration check-in', due: d(4), kind: 'official',
-      show: a.stage === 'new', why: 'You are in your first term.',
+      show: newish, why: 'You are in your first term.',
       summary: 'New students confirm their arrival with the Office of International Student Services so your SEVIS record stays active.',
       steps: ['Have your passport, I-20 or DS-2019, and visa ready', 'Download your most recent I-94 record from CBP', 'Follow the check-in instructions in your OISS welcome email', 'Save a copy of everything you submit'],
       sources: [S.pepCur, S.i94] });
 
     add({ id: 'cpt', cat: 'Work', title: 'Get CPT authorization before your internship starts', due: d(16), kind: 'official', priority: true,
-      show: f1 && !j1 && (I.includes('cpt') || a.stage === 'current') && a.stage !== 'new',
+      show: f1 && !j1 && (I.includes('cpt') || a.stage === 'current') && !newish,
       why: `You are a ${a.stage === 'graduating' ? 'graduating' : 'continuing'} F-1 student${I.includes('cpt') ? ' interested in internships' : ''}.`,
       warn: a.year === 'no' ? 'You said you have not completed a full academic year. You may not be eligible yet, unless your graduate program requires CPT from the start. Ask OISS before you accept a start date.' : a.year === 'unsure' ? 'Check with OISS whether you have completed one full academic year. Most students need it for CPT.' : null,
       summary: 'Curricular Practical Training lets F-1 students work in an internship that is part of their curriculum. It is authorized by your DSO and cannot be granted after you start working.',
@@ -714,8 +766,8 @@ p { margin: 0; }
       sources: [S.pepCur] });
 
     add({ id: 'insurance', cat: 'Health', title: 'Confirm your student health insurance', due: d(16), kind: 'official',
-      show: a.stage === 'new' || I.includes('health'),
-      why: a.stage === 'new' ? 'You are new this term.' : 'You asked about health insurance.',
+      show: newish || I.includes('health'),
+      why: newish ? 'You are new this term.' : 'You asked about health insurance.',
       summary: 'Make sure you are enrolled in, or have waived, the school insurance plan for this term, and save your insurance card on your phone.',
       steps: ['Check your enrollment or waiver status in your student account', 'Save a photo of your insurance card', 'Find the nearest in-network urgent care'],
       sources: [S.pepIntl] });
@@ -735,31 +787,31 @@ p { margin: 0; }
       sources: [S.irs, S.pepEmp] });
 
     add({ id: 'bank', cat: 'Daily life', title: 'Open a U.S. bank account', due: d(10), kind: 'tip',
-      show: a.stage === 'new' || I.includes('daily'), why: a.stage === 'new' ? 'You are new this term.' : 'You asked about banking.',
+      show: newish || I.includes('daily'), why: newish ? 'You are new this term.' : 'You asked about banking.',
       summary: 'Many banks open student accounts with a passport and I-20. Ask about fees before you sign up.',
       steps: ['Bring your passport, I-20 and proof of address', 'Ask for a student checking account with no monthly fee', 'Set up the bank’s app and your debit card'],
       sources: [] });
 
     add({ id: 'phone', cat: 'Daily life', title: 'Get a U.S. phone number', due: d(6), kind: 'tip',
-      show: a.stage === 'new' || I.includes('daily'), why: 'Banks, two-factor logins and employers expect a U.S. number.',
+      show: newish || I.includes('daily'), why: 'Banks, two-factor logins and employers expect a U.S. number.',
       summary: 'A prepaid plan is the fastest way to get started without a U.S. credit history.',
       steps: ['Compare prepaid plans at a carrier store', 'Keep your home number for family apps if needed', 'Add the new number to your OISS and school profiles'],
       sources: [] });
 
     add({ id: 'transport', cat: 'Getting around', title: 'Plan your commute', due: d(9), kind: 'tip',
-      show: I.includes('transport') || a.stage === 'new', why: 'You asked about getting around.',
+      show: I.includes('transport') || newish, why: 'You asked about getting around.',
       summary: 'Most students combine the campus shuttle, an LA Metro TAP card, and rideshare. Ask about student transit discounts.',
       steps: ['Save the campus shuttle schedule', 'Get a TAP card for Metro bus and rail', 'Share your live location with a friend on late trips'],
       sources: [] });
 
     add({ id: 'lease', cat: 'Housing', title: 'Rent or sublet safely', due: d(12), kind: 'official',
-      show: (I.includes('housing') || a.housing === 'looking' || a.stage === 'new') && a.housing !== 'on', why: a.housing === 'looking' ? 'You are still looking for a place.' : a.stage === 'new' ? 'You are new and may need off-campus housing.' : 'You asked about housing.',
+      show: (I.includes('housing') || a.housing === 'looking' || newish) && a.housing !== 'on', why: a.housing === 'looking' ? 'You are still looking for a place.' : newish ? 'You are new and may need off-campus housing.' : 'You asked about housing.',
       summary: 'Rental scams often target new students who cannot see a place in person. Take a few checks before you pay, and report your new address after you move.',
       steps: ['See the place, or do a live video tour, before paying anything', 'Never wire money, send gift cards or pay a deposit to hold an unseen place', 'For a sublet, confirm in writing that the landlord allows it', 'Read the deposit, utilities and early-exit terms, then sign a written agreement', 'Take dated photos of every room when you move in', 'Report your new address to OISS within 10 days'],
       sources: [S.ftcRent, S.pepCur] });
 
     add({ id: 'car', cat: 'Car', title: 'Buy a used car safely in California', due: d(25), kind: 'official',
-      show: I.includes('transport') || a.stage === 'new', why: I.includes('transport') ? 'You asked about getting around. Campus is hard to reach without a car.' : 'You are new, and most students near Malibu need a car or a carpool.',
+      show: I.includes('transport') || newish, why: I.includes('transport') ? 'You asked about getting around. Campus is hard to reach without a car.' : 'You are new, and most students near Malibu need a car or a carpool.',
       summary: 'Buying from another student or a private seller is often cheaper, but you handle the paperwork. In California the buyer has 10 days to transfer ownership at the DMV.',
       steps: ['Set a budget that includes insurance, registration and repairs', 'Check a fair price on Kelley Blue Book and get the CARFAX history', 'Have a mechanic inspect the car before you agree on a price', 'Get the signed title and a valid smog certificate from the seller', 'Buy insurance before you drive. Compare quotes, since you may not have U.S. credit history', 'Transfer ownership at the DMV within 10 days of buying', 'Ask the DMV whether you need a California driver license'],
       sources: [S.dmvPrivate, S.dmvSmog] });
@@ -821,6 +873,9 @@ p { margin: 0; }
     market: '<path d="M4 9.5 5.5 4h13L20 9.5M4 9.5h16M4 9.5a2.7 2.7 0 0 0 5.3 0 2.7 2.7 0 0 0 5.4 0 2.7 2.7 0 0 0 5.3 0"/><path d="M5.5 11.5V20h13v-8.5M10 20v-4.5h4V20"/>',
     forum: '<path d="M3.5 5.5a1.5 1.5 0 0 1 1.5-1.5h9a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H8.5l-3.5 3v-3a1.5 1.5 0 0 1-1.5-1.5z"/><path d="M15.5 8.5H19a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5v3l-3.5-3h-5a1.5 1.5 0 0 1-1.5-1.5V15"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
+    mail: '<rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4 7 8 6 8-6"/>',
+    lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>',
+    spark: '<path d="M12 3.5 13.8 9 19.5 10.5 13.8 12.2 12 18 10.2 12.2 4.5 10.5 10.2 9z"/><path d="M18.5 16v4M16.5 18h4"/>',
     Community: '<circle cx="9" cy="8.5" r="3"/><path d="M3.5 19.5c.6-3 2.8-5 5.5-5s4.9 2 5.5 5"/><path d="M15.5 5.8a3 3 0 1 1 1 5.6M20.5 19.5c-.3-2-1.3-3.5-3-4.4"/>',
   };
   const ic = (name, size = 20, sw = 1.8) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[name] || P.Visa}</svg>`;
@@ -850,7 +905,7 @@ p { margin: 0; }
   function appbar() {
     const urgent = state.variant === 'personal' && visibleTasks().some(t => !state.done[t.id] && daysTo(t.due) <= 7);
     return `<header class="appbar">
-      <div class="wordmark"><b>Saily</b><span>Pepperdine</span></div>
+      <div class="wordmark"><b>UniHub</b><span>Pepperdine</span></div>
       <div class="row" style="gap:8px">
         <button class="iconbtn" data-act="tab" data-tab="explore" aria-label="Search all topics">${ic('explore', 19)}</button>
         <button class="iconbtn" data-act="tab" data-tab="profile" aria-label="Profile">${ic('profile', 19)}</button>
@@ -860,7 +915,7 @@ p { margin: 0; }
   const backbar = () => `<div class="backbar"><button class="back" data-act="close">${ic('back', 20, 2)}Back</button></div>`;
   function tabbar() {
     const urgent = state.variant === 'personal' ? visibleTasks().filter(t => !state.done[t.id] && daysTo(t.due) <= 7).length : 0;
-    const tabs = [['home', 'Home'], ['tasks', state.variant === 'personal' ? 'Tasks' : 'Checklist'], ['market', 'Market'], ['forum', 'Forum'], ['ask', 'Saily']];
+    const tabs = [['home', 'Home'], ['tasks', state.variant === 'personal' ? 'Tasks' : 'Checklist'], ['market', 'Market'], ['forum', 'Forum'], ['ask', 'Ask']];
     return `<nav class="tabbar">${tabs.map(([k, l]) => `<button data-act="tab" data-tab="${k}" ${state.tab === k && !state.detail && !state.sub ? 'aria-current="page"' : ''}><span class="pillwrap">${ic(k, 22)}${k === 'tasks' && urgent ? `<span class="count">${urgent}</span>` : ''}</span>${l}</button>`).join('')}</nav>`;
   }
   const dsNotice = () => `<button class="notice" data-act="article" data-id="ds">
@@ -874,6 +929,22 @@ p { margin: 0; }
       <button data-act="go" data-tab="market" data-k="items"><span class="tile">${ic('tag', 22)}</span>Used items</button>
       <button data-act="go" data-tab="forum"><span class="tile">${ic('forum', 22)}</span>Forum</button>
     </div>`;
+  const UPDATES = [
+    { from: 'OISS', when: 'Mon', title: 'Spring 2027 registration opens soon. Stay full-time.', task: 'register' },
+    { from: 'OISS', when: 'Tue', title: 'Free Form 8843 tax workshop in February', task: 'tax' },
+    { from: 'OISS', when: 'Wed', title: 'Update: the “duration of status” rule is on hold', article: 'ds' },
+    { from: 'OISS', when: 'Thu', title: 'New students: complete immigration check-in this week', task: 'checkin' },
+    { from: 'Career Center', when: 'Fri', title: 'CPT and internship drop-in hours', task: 'cpt' },
+  ];
+  function updatesCard() {
+    if (state.variant !== 'personal') return '';
+    const mine = new Set(visibleTasks().map(t => t.id));
+    const list = UPDATES.filter(u => u.article ? showDS() : mine.has(u.task)).slice(0, 3);
+    if (!list.length) return '';
+    return `<div class="group"><div class="group-head"><h2>From your school</h2><span class="small muted">${list.length} for you</span></div>
+      <div class="list">${list.map(u => `<button class="item" data-act="${u.article ? 'article' : 'open'}" data-id="${u.article || u.task}"><span class="tile">${ic('mail', 19)}</span><span class="t"><span class="cat">${esc(u.from)} · ${esc(u.when)}</span><h3>${esc(u.title)}</h3><span class="why" style="color:var(--primary);font-weight:700">${u.article ? 'Read the summary' : 'Turned into a task: see what to do'}</span></span><span class="chev">${ic('chev', 18)}</span></button>`).join('')}</div>
+      <p class="small muted" style="padding:0 2px">UniHub reads school emails and keeps only what applies to you. Sample updates.</p></div>`;
+  }
   const DOW = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
   /* ---------- Screens ---------- */
@@ -885,7 +956,7 @@ p { margin: 0; }
         <path d="M0 98 C 50 80, 90 116, 140 98 S 230 80, 280 98 S 370 116, 400 98" opacity=".45"/>
       </svg>
       <div class="stack" style="gap:18px;position:relative">
-        <div class="wordmark"><b style="color:var(--brand-ink)">Saily</b><span style="color:var(--brand-accent)">Pepperdine</span></div>
+        <div class="wordmark"><b style="color:var(--brand-ink)">UniHub</b><span style="color:var(--brand-accent)">Pepperdine</span></div>
         <div class="rule"></div>
         <h1>Know what to do next, and by when.</h1>
         <p>Visa steps, deadlines and campus tasks, sorted for your situation and checked against official sources.</p>
@@ -905,7 +976,7 @@ p { margin: 0; }
     const ready = q.multi ? (val || []).length > 0 : !!val;
     return `<section class="screen">
       <div class="backbar">
-        ${state.qIndex > 0 ? `<button class="back" data-act="qback">${ic('back', 20, 2)}Back</button>` : `<div class="wordmark"><b>Saily</b></div>`}
+        ${state.qIndex > 0 ? `<button class="back" data-act="qback">${ic('back', 20, 2)}Back</button>` : `<div class="wordmark"><b>UniHub</b></div>`}
         <span class="mono small muted">${state.qIndex + 1} of ${keys.length}</span>
       </div>
       <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${keys.length}" aria-valuenow="${state.qIndex + 1}"><i style="width:${(state.qIndex + 1) / keys.length * 100}%"></i></div>
@@ -935,7 +1006,7 @@ p { margin: 0; }
     const a = state.answers;
     const todo = all.filter(t => !state.done[t.id]);
     const next = todo[0];
-    const greeting = { new: 'Welcome to Malibu', current: 'Good to see you', graduating: 'Your final stretch', unsure: 'Welcome' }[a.stage] || 'Welcome';
+    const greeting = { arriving: 'Getting ready to arrive', new: 'Welcome to Malibu', exchange: 'Welcome to Pepperdine', current: 'Good to see you', graduating: 'Your final stretch', unsure: 'Welcome' }[a.stage] || 'Welcome';
     let heroHTML;
     if (next) {
       const st = (state.steps[next.id] || []).filter(Boolean).length, n = daysTo(next.due);
@@ -953,9 +1024,10 @@ p { margin: 0; }
     return `<section class="screen">
       ${appbar()}
       <div class="stack" style="gap:6px"><span class="eyebrow">${DOW[TODAY.getDay()]}, ${fmt(TODAY)} · ${esc(a.visa || '')} ${esc(LABEL('stage')(a.stage).toLowerCase())}</span><h1>${greeting}</h1></div>
+      ${!state.priv.visa ? `<div class="callout info"><p>Visa personalization is off. You see general visa content only.</p></div>` : ''}
       ${heroHTML}
       ${quickRow()}
-      ${showDS() ? dsNotice() : ''}
+      ${updatesCard()}
       ${week.length ? `<div class="group"><div class="group-head"><h2>This week</h2><span class="small muted">${week.length} due</span></div>${list(week.map(t => item(t)))}</div>` : ''}
       ${later.length ? `<div class="group"><div class="group-head"><h2>Coming up</h2><button class="linkbtn" data-act="tab" data-tab="tasks">All ${todo.length}${ic('chev', 14, 2.2)}</button></div>${list(later.map(t => item(t)))}</div>` : ''}
       <p class="small muted">Picked for you from ${esc([a.visa, LABEL('stage')(a.stage).toLowerCase(), ...(a.interests || []).map(i => LABEL('interests')(i).toLowerCase())].filter(Boolean).join(', '))}. <button class="linkbtn" data-act="tab" data-tab="profile">Edit</button></p>
@@ -1053,11 +1125,11 @@ p { margin: 0; }
     const all = allTasks(personal ? state.answers : { interests: [] }, personal);
     const q = state.query.trim().toLowerCase();
     const items = all.filter(t => !q || (t.title + ' ' + t.cat + ' ' + t.summary).toLowerCase().includes(q)).sort((x, y) => mine.has(y.id) - mine.has(x.id));
-    if (!items.length) return `<div class="callout info"><p>No topics match “${esc(state.query)}”. Try asking Saily, or contact OISS.</p></div>`;
+    if (!items.length) return `<div class="callout info"><p>No topics match “${esc(state.query)}”. Try asking UniHub, or contact OISS.</p></div>`;
     return list(items.map(t => item(t, { badges: true, mine: mine.has(t.id), summary: true })));
   }
 
-  /* ---------- Saily ---------- */
+  /* ---------- Assistant ---------- */
   const SUGGEST = ['Am I eligible for CPT?', 'When can I apply for OPT?', 'How do I buy a used car?', 'I moved. What do I report?', 'Do I need to file taxes?', 'What happened to the visa-stay rule?'];
   function answer(text) {
     const a = state.answers, personal = state.variant === 'personal';
@@ -1087,14 +1159,14 @@ p { margin: 0; }
   }
   function vAsk() {
     const personal = state.variant === 'personal';
-    const msgs = state.chat.length ? state.chat : [{ from: 'bot', html: `<p>Hi, I’m Saily. Ask me about CPT, OPT, taxes, housing or your deadlines.${personal ? ' I use your profile to tailor answers.' : ''}</p>`, sources: [] }];
+    const msgs = state.chat.length ? state.chat : [{ from: 'bot', html: `<p>Hi, I’m the UniHub assistant. Ask me about CPT, OPT, taxes, housing or your deadlines.${personal ? ' I use your profile to tailor answers.' : ''}</p>`, sources: [] }];
     return `<section class="screen" id="chatscreen">
       ${appbar()}
-      <div class="stack" style="gap:6px"><span class="eyebrow">Assistant</span><h1>Ask Saily</h1><p class="small muted">Saily explains and points to official sources. OISS makes the final call on your case.</p></div>
+      <div class="stack" style="gap:6px"><span class="eyebrow">Assistant</span><h1>Ask UniHub</h1><p class="small muted">UniHub explains and points to official sources. OISS makes the final call on your case.</p></div>
       <div class="chat">${msgs.map(m => m.from === 'me' ? `<div class="bubble me">${esc(m.text)}</div>` : `<div class="row" style="align-items:flex-end;gap:8px"><span class="avatar-s" aria-hidden="true">S</span><div class="bubble bot">${m.html}${m.task ? `<button class="btn small" data-act="open" data-id="${m.task}" style="align-self:flex-start">Open the task${ic('chev', 14, 2.2)}</button>` : ''}${m.sources && m.sources.length ? `<div class="fine">${m.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')}<span>Checked ${CHECKED}</span></div>` : ''}</div></div>`).join('')}</div>
       <div class="chips wrap">${SUGGEST.map(s => `<button class="chip" data-act="suggest" data-text="${esc(s)}">${esc(s)}</button>`).join('')}</div>
     </section>
-    <form class="composer" id="composer"><input id="askinput" placeholder="Ask a question" aria-label="Ask Saily" autocomplete="off"><button type="submit" aria-label="Send">${ic('send', 18, 2)}</button></form>`;
+    <form class="composer" id="composer"><input id="askinput" placeholder="Ask a question" aria-label="Ask UniHub" autocomplete="off"><button type="submit" aria-label="Send">${ic('send', 18, 2)}</button></form>`;
   }
 
   function vProfile() {
@@ -1107,7 +1179,15 @@ p { margin: 0; }
       ${personal ? `<dl class="list" style="margin:0">${rows}</dl>
         <p class="small muted">More answers mean more exact dates. Items marked “Not asked” use safe defaults.</p>
         <button class="btn ghost" data-act="edit">Edit my answers</button>` : `<div class="callout info"><p>The generic version does not collect a profile. Everyone sees the same content.</p></div>`}
-      <div class="notice" style="cursor:default"><span class="ic">${ic('bell', 18)}</span><span class="stack" style="gap:2px"><h3>Notifications on</h3><p>7 days and 1 day before each deadline, plus rule-change alerts for your visa type.</p></span></div>
+      <div class="group"><div class="group-head"><h2>Privacy</h2></div>
+        <div class="list">${[['visa', 'Use my visa status to personalize', 'Turn off to see general visa content only'], ['push', 'Deadline reminders', '7 days and 1 day before each deadline'], ['forum', 'Show my program level in the Forum', 'Otherwise you appear as “Verified student”']].map(([k, t, d]) => `<button class="toggle" data-act="priv" data-k="${k}" aria-pressed="${!!state.priv[k]}"><span class="t"><strong>${t}</strong><span>${d}</span></span><span class="switch" aria-hidden="true"></span></button>`).join('')}</div>
+        <button class="btn ghost" data-act="deleteme" style="color:var(--stamp)">Delete my profile and answers</button>
+      </div>
+      <div class="group"><div class="group-head"><h2>How UniHub uses AI</h2></div>
+        <div class="card stack" style="gap:10px">
+          ${[['spark', 'Explains, never decides', 'The assistant summarizes rules in plain language. OISS makes every visa and eligibility decision.'], ['shield', 'Sources you can check', 'Visa, DMV and tax steps link to the official page, with the date we last checked it.'], ['lock', 'Your answers stay yours', 'They only shape your plan. Your school controls the data, and you can delete it any time.'], ['forum', 'People are verified', 'Market and Forum posts come from verified students and can be reported.']].map(([i, h, p]) => `<div class="row" style="align-items:flex-start;gap:12px"><span class="tile">${ic(i, 18)}</span><span class="stack" style="gap:2px"><strong style="font-size:14px">${h}</strong><span class="small muted">${p}</span></span></div>`).join('')}
+        </div>
+      </div>
       <button class="btn ghost" data-act="restart">Sign out and restart demo</button>
     </section>`;
   }
@@ -1168,6 +1248,8 @@ p { margin: 0; }
     else if (act === 'message') { toast('Message sent to the seller (demo)'); return; }
     else if (act === 'site') { state.siteClicks++; metrics(); return; }
     else if (act === 'board') { state.board = b.dataset.b; }
+    else if (act === 'priv') { state.priv[b.dataset.k] = !state.priv[b.dataset.k]; }
+    else if (act === 'deleteme') { state = fresh(state.variant, state.qCount); toast('Profile and answers deleted'); return; }
     else if (act === 'thread') { state.sub = { type: 'thread', id: b.dataset.id }; state.forumViews++; }
     else if (act === 'newthread') { state.sub = { type: 'newthread' }; }
     else if (act === 'step') {
@@ -1258,7 +1340,7 @@ p { margin: 0; }
   $('copy').addEventListener('click', () => {
     const a = state.answers;
     const lines = [
-      `Saily prototype session · ${new Date().toLocaleString()}`,
+      `UniHub prototype session · ${new Date().toLocaleString()}`,
       `Version: ${state.variant === 'personal' ? `Personalized, ${state.qCount} questions` : 'Generic hub'}`,
       `Time in app: ${$('m-time').textContent}`,
       `Onboarding time: ${$('m-ob').textContent}`,
@@ -1267,7 +1349,7 @@ p { margin: 0; }
       `Tasks opened: ${[...state.opened].join(', ') || 'none'}`,
       `Steps checked: ${state.stepsChecked}`,
       `Tasks marked done: ${Object.keys(state.done).filter(k => state.done[k]).join(', ') || 'none'}`,
-      `Questions to Saily: ${state.asked}`,
+      `Questions to the assistant: ${state.asked}`,
       `Listings opened: ${state.mktViews} · Forum threads opened: ${state.forumViews} · Outside sites clicked: ${state.siteClicks} · Posts: ${state.posts}`,
       state.variant === 'personal' ? `Profile: ${Object.entries(a).map(([k, v]) => `${k}=${Array.isArray(v) ? v.join('+') : v}`).join('; ')}` : '',
       'Relevance rating (1-5): ', 'Trust rating (1-5): ', 'Notes: ',
